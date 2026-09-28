@@ -1,0 +1,14 @@
+# 🗄️ Base de Datos
+
+Esta carpeta contiene el diseño y los archivos relacionados con la
+base de datos del Casino Virtual.
+
+## Diagrama de Base de Datos
+
+El modelo inicial está compuesto por las siguientes tablas:
+
+- `usuario`
+- `juego`
+- `partida`
+- `movimiento_token`
+
