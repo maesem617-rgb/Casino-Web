@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+        <!-- Ilustraciones reutilizables (se usan con <use href="#nombre">) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    <symbol id="dado5" viewBox="0 0 100 100">
+        <rect x="4" y="4" width="92" height="92" rx="20" fill="#fff"/>
+        <g fill="#6d28d9">
+        <circle cx="28" cy="28" r="9"/><circle cx="72" cy="28" r="9"/>
+        <circle cx="50" cy="50" r="9"/>
+        <circle cx="28" cy="72" r="9"/><circle cx="72" cy="72" r="9"/>
+        </g>
+    </symbol>
+    <symbol id="dado3" viewBox="0 0 100 100">
+        <rect x="4" y="4" width="92" height="92" rx="20" fill="#ede9fe"/>
+        <g fill="#7c3aed">
+        <circle cx="28" cy="28" r="9"/><circle cx="50" cy="50" r="9"/><circle cx="72" cy="72" r="9"/>
+        </g>
+    </symbol>
+    <symbol id="carta-a" viewBox="0 0 70 100">
+        <rect x="2" y="2" width="66" height="96" rx="8" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+        <text x="10" y="24" font-size="18" font-weight="800" fill="#1e1b4b" font-family="Montserrat, sans-serif">A</text>
+        <text x="35" y="66" text-anchor="middle" font-size="34" fill="#1e1b4b">♠</text>
+    </symbol>
+    <symbol id="carta-k" viewBox="0 0 70 100">
+        <rect x="2" y="2" width="66" height="96" rx="8" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+        <text x="10" y="24" font-size="18" font-weight="800" fill="#c026d3" font-family="Montserrat, sans-serif">K</text>
+        <text x="35" y="66" text-anchor="middle" font-size="34" fill="#c026d3">♥</text>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="#" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        <nav class="pestanas">
+            <a href="#" class="activa">Casino</a>
+            <a href="#">Mis partidas</a>
+        </nav>
+        </div>
+        <div class="barra-der">
+        <div class="saldo">
+            <svg><use href="#moneda"/></svg>
+            <span>1,000</span>
+        </div>
+        <a href="#" class="enlace">Iniciar sesión</a>
+        <a href="#" class="boton">Registrarse</a>
+        </div>
+    </header>
+
+    <div class="cuerpo">
+
+        <!-- ===== Barra lateral ===== -->
+        <aside class="lateral">
+        <a href="#" class="activo" title="Inicio">
+            <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        </a>
+        <a href="#" title="Cara o cruz">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>
+        </a>
+        <a href="#" title="Dados">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg>
+        </a>
+        <a href="#" title="Ruleta">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg>
+        </a>
+        <a href="#" title="Blackjack">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="11" height="15" rx="2"/><path d="M14 7l5 1.5a1.5 1.5 0 0 1 1 1.8L17 20"/></svg>
+        </a>
+        <span class="separador"></span>
+        <a href="#" title="Historial">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </a>
+        <a href="#" title="Perfil">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+        </aside>
+
+        <main class="contenido">
+
+        <!-- ===== Banners principales ===== -->
+        <section class="hero">
+            <article class="banner banner-principal">
+            <p class="etiqueta">Bienvenida</p>
+            <h1>Regístrate y recibe<br><span>1,000 tokens</span><br>para empezar</h1>
+            <div class="puntos"><i class="activo"></i><i></i><i></i></div>
+            <a href="#" class="boton-jugar">Jugar ahora <span class="play">▶</span></a>
+
+            <div class="ruleta"></div>
+            <svg class="flotante f1"><use href="#ficha"/></svg>
+            <svg class="flotante f2"><use href="#moneda"/></svg>
+            <svg class="flotante f3"><use href="#moneda"/></svg>
+            </article>
+
+            <article class="banner banner-chico banner-blackjack">
+            <p class="etiqueta">Juego</p>
+            <h2>Llega a <span>21</span> en Blackjack</h2>
+            <a href="#" class="boton-mini">Jugar ★</a>
+            <div class="cartas">
+                <svg class="carta c1"><use href="#carta-k"/></svg>
+                <svg class="carta c2"><use href="#carta-a"/></svg>
+            </div>
+            </article>
+
+            <article class="banner banner-chico banner-dados">
+            <p class="etiqueta">Juego</p>
+            <h2>Lanza los <span>dados</span></h2>
+            <a href="#" class="boton-mini">Jugar ★</a>
+            <svg class="dado d1"><use href="#dado5"/></svg>
+            <svg class="dado d2"><use href="#dado3"/></svg>
+            </article>
+        </section>
+
+        <!-- ===== Juegos ===== -->
+        <section class="seccion">
+            <div class="seccion-titulo">
+            <h3><span class="punto-morado"></span>Nuestros juegos</h3>
+            </div>
+            <div class="juegos">
+            <article class="juego j-moneda">
+                <div class="ilustracion">
+                <svg class="moneda-grande"><use href="#moneda"/></svg>
+                </div>
+                <div class="juego-info">
+                <h4>Cara o cruz</h4>
+                <p>Elige un lado y duplica tu apuesta.</p>
+                </div>
+                <a href="#" class="boton-mini">Jugar</a>
+            </article>
+
+            <article class="juego j-dados">
+                <div class="ilustracion">
+                <svg class="dado-g g1"><use href="#dado5"/></svg>
+                <svg class="dado-g g2"><use href="#dado3"/></svg>
+                </div>
+                <div class="juego-info">
+                <h4>Dados</h4>
+                <p>Predice el resultado del tiro.</p>
+                </div>
+                <a href="#" class="boton-mini">Jugar</a>
+            </article>
+
+            <article class="juego j-ruleta">
+                <div class="ilustracion">
+                <div class="ruleta ruleta-chica"></div>
+                </div>
+                <div class="juego-info">
+                <h4>Ruleta</h4>
+                <p>Número, color o par e impar.</p>
+                </div>
+                <a href="#" class="boton-mini">Jugar</a>
+            </article>
+
+            <article class="juego j-blackjack">
+                <div class="ilustracion">
+                <svg class="carta-g c1"><use href="#carta-k"/></svg>
+                <svg class="carta-g c2"><use href="#carta-a"/></svg>
+                </div>
+                <div class="juego-info">
+                <h4>Blackjack</h4>
+                <p>Acércate a 21 sin pasarte.</p>
+                </div>
+                <a href="#" class="boton-mini">Jugar</a>
+            </article>
+            </div>
+        </section>
+
+        <!-- ===== Banner ancho ===== -->
+        <section class="banner banner-ancho">
+            <div>
+            <p class="etiqueta">Sin riesgo</p>
+            <h2>Juega con tokens virtuales,<br><span>sin dinero real</span></h2>
+            <a href="#" class="boton-jugar">Crear cuenta <span class="play">▶</span></a>
+            </div>
+            <div class="ancho-ilustracion">
+            <div class="ruleta"></div>
+            <svg class="flotante f4"><use href="#ficha"/></svg>
+            <svg class="flotante f5"><use href="#moneda"/></svg>
+            <svg class="flotante f6"><use href="#dado5"/></svg>
+            </div>
+        </section>
+
+        <!-- ===== Partidas destacadas ===== -->
+        <section class="seccion">
+            <div class="seccion-titulo">
+            <h3><span class="punto-morado"></span>Partidas destacadas</h3>
+            </div>
+            <div class="filtros">
+            <a href="#" class="activo">Recientes</a>
+            <a href="#">Grandes premios</a>
+            <a href="#">Mejores jugadores</a>
+            </div>
+
+            <div class="tabla">
+            <div class="fila encabezado">
+                <span>Jugador</span><span>Juego</span><span>Apuesta</span><span>Premio</span><span>Multiplicador</span>
+            </div>
+
+            <div class="fila">
+                <span class="jugador"><i class="avatar a1">LR</i><span><b>LunaRoja</b><small>Nivel 3</small></span></span>
+                <span>Ruleta</span>
+                <span class="tokens"><svg><use href="#moneda"/></svg>50</span>
+                <span class="tokens gana"><svg><use href="#moneda"/></svg>1,800</span>
+                <span class="multi">x36</span>
+            </div>
+            <div class="fila">
+                <span class="jugador"><i class="avatar a2">DL</i><span><b>DadoLoco22</b><small>Nivel 1</small></span></span>
+                <span>Dados</span>
+                <span class="tokens"><svg><use href="#moneda"/></svg>100</span>
+                <span class="tokens pierde">—</span>
+                <span class="multi cero">x0</span>
+            </div>
+            <div class="fila">
+                <span class="jugador"><i class="avatar a3">AP</i><span><b>AsDePicas</b><small>Nivel 5</small></span></span>
+                <span>Blackjack</span>
+                <span class="tokens"><svg><use href="#moneda"/></svg>200</span>
+                <span class="tokens gana"><svg><use href="#moneda"/></svg>500</span>
+                <span class="multi">x2.5</span>
+            </div>
+            <div class="fila">
+                <span class="jugador"><i class="avatar a4">M7</i><span><b>Moneda7</b><small>Nivel 2</small></span></span>
+                <span>Cara o cruz</span>
+                <span class="tokens"><svg><use href="#moneda"/></svg>75</span>
+                <span class="tokens gana"><svg><use href="#moneda"/></svg>150</span>
+                <span class="multi">x2</span>
+            </div>
+            <div class="fila">
+                <span class="jugador"><i class="avatar a5">RM</i><span><b>ReyDeLaMesa</b><small>Nivel 4</small></span></span>
+                <span>Blackjack</span>
+                <span class="tokens"><svg><use href="#moneda"/></svg>300</span>
+                <span class="tokens gana"><svg><use href="#moneda"/></svg>600</span>
+                <span class="multi">x2</span>
+            </div>
+            </div>
+        </section>
+
+        <!-- ===== Historial y perfil ===== -->
+        <section class="inferior">
+            <article class="banner banner-historial">
+            <p class="etiqueta">Tu actividad</p>
+            <h2>Revisa tu<br><span>historial de partidas</span></h2>
+            <div class="contadores">
+                <div><b>128</b><small>Partidas</small></div>
+                <div><b>74</b><small>Ganadas</small></div>
+                <div><b>54</b><small>Perdidas</small></div>
+            </div>
+            <a href="#" class="boton-mini">Ver historial</a>
+            <div class="cartas cartas-historial">
+                <svg class="carta c1"><use href="#carta-k"/></svg>
+                <svg class="carta c2"><use href="#carta-a"/></svg>
+            </div>
+            <svg class="flotante f7"><use href="#moneda"/></svg>
+            </article>
+
+            <div class="inferior-der">
+            <article class="banner banner-perfil">
+                <p class="etiqueta">Cuenta</p>
+                <h2>Tu perfil</h2>
+                <p class="texto">Saldo, estadísticas y datos de tu cuenta.</p>
+                <svg class="flotante f8"><use href="#moneda"/></svg>
+                <svg class="flotante f9"><use href="#ficha"/></svg>
+            </article>
+            <article class="banner banner-responsable">
+                <p class="etiqueta">Importante</p>
+                <h2>Proyecto académico</h2>
+                <p class="texto">Los tokens no tienen valor monetario. No hay depósitos ni retiros.</p>
+            </article>
+            </div>
+        </section>
+
+        </main>
+    </div>
+
+    <!-- ===== Pie de página ===== -->
+    <footer class="pie">
+        <div class="pie-logo">
+        <a href="#" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        <p>Simulación de casino con tokens virtuales.<br>Sin dinero real.</p>
+        </div>
+        <div class="pie-columna">
+        <h5>Juegos</h5>
+        <a href="#">Cara o cruz</a>
+        <a href="#">Dados</a>
+        <a href="#">Ruleta</a>
+        <a href="#">Blackjack</a>
+        </div>
+        <div class="pie-columna">
+        <h5>Cuenta</h5>
+        <a href="#">Iniciar sesión</a>
+        <a href="#">Registrarse</a>
+        <a href="#">Historial</a>
+        <a href="#">Perfil</a>
+        </div>
+        <div class="pie-columna">
+        <h5>Proyecto</h5>
+        <a href="#">Acerca de</a>
+        <a href="#">Equipo</a>
+        <a href="#">Repositorio</a>
+        </div>
+        </footer>
+    </div>
+
+</body>
+</html>

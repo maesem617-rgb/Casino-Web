@@ -1,0 +1,314 @@
+/* ===== Casino Virtual · Estilos generales ===== */
+
+:root {
+    --fondo: #0b0b14;
+    --panel: #12121d;
+    --panel-2: #1a1a2a;
+    --borde: #262639;
+
+    --morado: #8b5cf6;
+    --morado-claro: #c4b5fd;
+    --morado-medio: #7c3aed;
+    --morado-oscuro: #4c1d95;
+    --fucsia: #d946ef;
+
+  --dorado: #fbbf24;
+  --verde: #22c55e;
+
+  --texto: #f5f5fa;
+  --texto-suave: #9a9ab3;
+
+  --titulos: "Montserrat", sans-serif;
+  --cuerpo: "Inter", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 1280px; /* Diseño solo para PC */
+  font-family: var(--cuerpo);
+  color: var(--texto);
+  background:
+    radial-gradient(900px 500px at 50% -5%, rgba(139, 92, 246, .28), transparent 65%),
+    linear-gradient(180deg, #0b0b14 0%, #1d0b36 45%, #2a0d4d 70%, #0b0b14 100%);
+  padding: 40px 0;
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, h5 { font-family: var(--titulos); margin: 0; }
+
+/* ===== Marco principal ===== */
+.marco {
+  width: 1200px;
+  margin: 0 auto;
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 0 1px rgba(139, 92, 246, .08);
+}
+
+/* ===== Barra superior ===== */
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--borde);
+}
+.barra-izq, .barra-der { display: flex; align-items: center; gap: 24px; }
+
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--titulos); font-size: 20px; font-weight: 700; }
+.logo b { color: var(--morado-claro); font-weight: 900; }
+.logo-icono { width: 32px; height: 32px; }
+
+.pestanas { display: flex; background: var(--panel-2); border-radius: 999px; padding: 4px; }
+.pestanas a { padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--texto-suave); }
+.pestanas a.activa { background: var(--morado-medio); color: #fff; box-shadow: 0 4px 14px rgba(124, 58, 237, .45); }
+
+.saldo {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--panel-2); border: 1px solid var(--borde);
+  padding: 6px 14px 6px 6px; border-radius: 999px;
+  font-weight: 700; font-size: 14px;
+}
+.saldo svg { width: 24px; height: 24px; }
+
+.enlace { font-size: 14px; color: var(--texto-suave); }
+.enlace:hover { color: var(--texto); }
+
+.boton {
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  padding: 9px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 700;
+  box-shadow: 0 6px 18px rgba(168, 85, 247, .4);
+}
+
+/* ===== Distribución ===== */
+.cuerpo { display: grid; grid-template-columns: 72px 1fr; }
+
+.lateral {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px 0; border-right: 1px solid var(--borde);
+}
+.lateral a {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center;
+  color: var(--texto-suave); transition: .2s;
+}
+.lateral a:hover { background: var(--panel-2); color: var(--texto); }
+.lateral a.activo { background: rgba(139, 92, 246, .18); color: var(--morado-claro); }
+.lateral svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.separador { width: 28px; height: 1px; background: var(--borde); margin: 6px 0; }
+
+.contenido { padding: 24px; display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+
+/* ===== Banners (base) ===== */
+.banner {
+  position: relative; overflow: hidden;
+  border-radius: 18px; padding: 28px;
+}
+.etiqueta {
+  margin: 0 0 10px; font-size: 11px; font-weight: 700;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--dorado);
+}
+.banner h1 { font-size: 30px; line-height: 1.2; text-transform: uppercase; position: relative; z-index: 2; }
+.banner h2 { font-size: 22px; line-height: 1.25; text-transform: uppercase; position: relative; z-index: 2; }
+.banner h1 span, .banner h2 span { color: var(--dorado); }
+.banner .texto { color: #ddd6fe; font-size: 14px; max-width: 70%; position: relative; z-index: 2; margin: 8px 0 0; }
+
+.boton-jugar {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(0, 0, 0, .35); border: 1px solid rgba(255, 255, 255, .12);
+  padding: 5px 5px 5px 18px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; color: var(--morado-claro);
+}
+.play {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--dorado); color: #3b0764; font-size: 12px;
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, .25);
+}
+.boton-mini {
+  position: relative; z-index: 2;
+  display: inline-block; margin-top: 16px;
+  background: rgba(0, 0, 0, .4); border: 1px solid rgba(255, 255, 255, .1);
+  padding: 7px 16px; border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.boton-mini:hover, .boton-jugar:hover { border-color: var(--morado-claro); }
+
+.flotante { position: absolute; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45)); }
+
+/* ===== Ruleta (hecha con CSS) ===== */
+.ruleta {
+  width: 260px; height: 260px; border-radius: 50%;
+  background: repeating-conic-gradient(#7c3aed 0 10deg, #17111f 10deg 20deg);
+  border: 12px solid var(--dorado);
+  box-shadow: 0 0 0 6px #92400e, 0 20px 50px rgba(0, 0, 0, .6);
+  position: relative;
+}
+.ruleta::before {
+  content: ""; position: absolute; inset: 22%; border-radius: 50%;
+  background: radial-gradient(circle, #4c1d95, #1e0b3a);
+  border: 4px solid #fbbf24aa;
+}
+.ruleta::after {
+  content: ""; position: absolute; inset: 40%; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fde68a, #f59e0b 60%, #92400e);
+}
+
+/* ===== Hero ===== */
+.hero { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; height: 270px; }
+
+.banner-principal {
+  background: linear-gradient(135deg, #6d28d9 0%, #3b0764 55%, #1e1b4b 100%);
+  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+}
+.banner-principal .ruleta { position: absolute; right: -60px; bottom: -90px; transform: rotate(12deg); }
+.banner-principal .boton-jugar { align-self: flex-start; }
+.puntos { display: flex; gap: 6px; position: relative; z-index: 2; }
+.puntos i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, .35); }
+.puntos i.activo { width: 22px; border-radius: 4px; background: var(--dorado); }
+.f1 { width: 56px; height: 56px; right: 200px; bottom: 20px; transform: rotate(-20deg); }
+.f2 { width: 54px; height: 54px; right: 30px; top: 22px; }
+.f3 { width: 40px; height: 40px; right: 30px; top: 96px; }
+
+.banner-chico { display: flex; flex-direction: column; }
+.banner-blackjack { background: linear-gradient(160deg, #581c87 0%, #2e1065 60%, #1e1b4b 100%); }
+.banner-dados { background: linear-gradient(160deg, #a21caf 0%, #6b21a8 50%, #2e1065 100%); }
+.banner-chico .boton-mini { align-self: flex-start; }
+
+.cartas .carta { position: absolute; width: 76px; height: 108px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); }
+.banner-blackjack .c1 { right: 64px; bottom: 10px; transform: rotate(-14deg); }
+.banner-blackjack .c2 { right: 16px; bottom: -4px; transform: rotate(10deg); }
+
+.dado { position: absolute; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .45)); }
+.d1 { width: 90px; height: 90px; right: 20px; bottom: 28px; transform: rotate(16deg); }
+.d2 { width: 64px; height: 64px; right: 112px; bottom: 16px; transform: rotate(-18deg); }
+
+/* ===== Secciones ===== */
+.seccion { display: flex; flex-direction: column; gap: 16px; }
+.seccion-titulo h3 { display: flex; align-items: center; gap: 10px; font-size: 16px; }
+.punto-morado { width: 10px; height: 10px; border-radius: 50%; background: var(--morado); box-shadow: 0 0 12px var(--morado); }
+
+/* ===== Tarjetas de juegos ===== */
+.juegos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.juego {
+  position: relative; overflow: hidden;
+  height: 250px; border-radius: 16px; padding: 18px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  border: 1px solid rgba(255, 255, 255, .06);
+  transition: transform .2s, box-shadow .2s;
+}
+.juego:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(139, 92, 246, .35); }
+
+.j-moneda    { background: linear-gradient(160deg, #3b0764, #1a1a2a 75%); }
+.j-dados     { background: linear-gradient(160deg, #6b21a8, #1a1a2a 75%); }
+.j-ruleta    { background: linear-gradient(160deg, #4c1d95, #1a1a2a 75%); }
+.j-blackjack { background: linear-gradient(160deg, #86198f, #1a1a2a 75%); }
+
+.ilustracion { position: absolute; inset: 0 0 90px 0; display: grid; place-items: center; }
+.moneda-grande { width: 110px; height: 110px; filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .5)); transform: rotate(-12deg); }
+.dado-g { position: absolute; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .45)); }
+.g1 { width: 84px; height: 84px; transform: translate(-28px, -6px) rotate(-14deg); }
+.g2 { width: 64px; height: 64px; transform: translate(40px, 22px) rotate(18deg); }
+.ruleta-chica { width: 130px; height: 130px; border-width: 7px; box-shadow: 0 0 0 4px #92400e, 0 14px 30px rgba(0, 0, 0, .5); }
+.carta-g { position: absolute; width: 74px; height: 106px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); }
+.carta-g.c1 { transform: translate(-22px, 0) rotate(-12deg); }
+.carta-g.c2 { transform: translate(22px, 6px) rotate(10deg); }
+
+.juego-info { position: relative; z-index: 2; }
+.juego-info h4 { font-size: 17px; text-transform: uppercase; }
+.juego-info p { margin: 4px 0 0; font-size: 13px; color: var(--texto-suave); }
+.juego .boton-mini { align-self: flex-start; margin-top: 12px; background: var(--morado-medio); border: none; }
+
+/* ===== Banner ancho ===== */
+.banner-ancho {
+  height: 220px; padding: 36px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(110deg, #1e1b4b 0%, #4c1d95 55%, #a21caf 100%);
+}
+.banner-ancho h2 { font-size: 30px; margin-bottom: 20px; }
+.ancho-ilustracion { position: absolute; right: 60px; top: 0; bottom: 0; width: 420px; }
+.ancho-ilustracion .ruleta { position: absolute; right: 60px; top: -40px; width: 300px; height: 300px; }
+.f4 { width: 80px; height: 80px; left: 20px; top: 60px; transform: rotate(-18deg); }
+.f5 { width: 60px; height: 60px; right: 10px; bottom: 16px; }
+.f6 { width: 70px; height: 70px; left: 70px; bottom: 10px; transform: rotate(14deg); }
+
+/* ===== Tabla de partidas ===== */
+.filtros { display: flex; gap: 8px; }
+.filtros a { padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--texto-suave); }
+.filtros a.activo { background: var(--morado-medio); color: #fff; }
+
+.tabla { display: flex; flex-direction: column; gap: 6px; }
+.fila {
+  display: grid; grid-template-columns: 2.2fr 1.2fr 1fr 1fr 1fr;
+  align-items: center; padding: 12px 18px;
+  background: var(--panel-2); border-radius: 12px; font-size: 14px;
+}
+.fila.encabezado { background: none; padding-top: 0; padding-bottom: 4px; font-size: 12px; color: var(--texto-suave); }
+.fila > span:nth-child(n+3) { justify-self: start; }
+
+.jugador { display: flex; align-items: center; gap: 12px; }
+.jugador b { display: block; font-size: 14px; }
+.jugador small { font-size: 11px; color: var(--morado-claro); text-transform: uppercase; letter-spacing: .05em; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-style: normal; font-size: 12px; font-weight: 700;
+  border: 2px solid var(--morado);
+}
+.a1 { background: linear-gradient(135deg, #be123c, #7c3aed); }
+.a2 { background: linear-gradient(135deg, #0ea5e9, #6d28d9); }
+.a3 { background: linear-gradient(135deg, #a21caf, #4c1d95); }
+.a4 { background: linear-gradient(135deg, #f59e0b, #9333ea); }
+.a5 { background: linear-gradient(135deg, #10b981, #5b21b6); }
+
+.tokens { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.tokens svg { width: 18px; height: 18px; }
+.tokens.gana { color: var(--verde); }
+.tokens.pierde { color: var(--texto-suave); }
+.multi { font-weight: 700; color: var(--morado-claro); }
+.multi.cero { color: var(--texto-suave); }
+
+/* ===== Sección inferior ===== */
+.inferior { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; height: 360px; }
+.inferior-der { display: grid; grid-template-rows: 1fr 1fr; gap: 16px; }
+
+.banner-historial {
+  background: linear-gradient(150deg, #7e22ce 0%, #4c1d95 45%, #1e1b4b 100%);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.banner-historial h2 { font-size: 28px; }
+.banner-historial .boton-mini { align-self: flex-start; }
+.contadores { display: flex; gap: 10px; margin-top: 20px; position: relative; z-index: 2; }
+.contadores div {
+  min-width: 78px; text-align: center; padding: 10px 8px;
+  background: rgba(0, 0, 0, .35); border: 1px solid rgba(255, 255, 255, .1); border-radius: 10px;
+}
+.contadores b { display: block; font-family: var(--titulos); font-size: 24px; }
+.contadores small { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--morado-claro); }
+
+.cartas-historial .carta { width: 130px; height: 186px; }
+.cartas-historial .c1 { right: 120px; bottom: 30px; transform: rotate(-16deg); }
+.cartas-historial .c2 { right: 40px; bottom: 50px; transform: rotate(8deg); }
+.f7 { width: 64px; height: 64px; right: 30px; top: 26px; }
+
+.banner-perfil { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #6d28d9 100%); }
+.banner-responsable { background: linear-gradient(135deg, #581c87 0%, #86198f 100%); }
+.f8 { width: 70px; height: 70px; right: 30px; top: 30px; }
+.f9 { width: 50px; height: 50px; right: 100px; bottom: 16px; transform: rotate(20deg); }
+
+/* ===== Pie de página ===== */
+.pie {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px;
+  padding: 36px 48px; border-top: 1px solid var(--borde); background: var(--panel);
+}
+.pie-logo p { margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: var(--texto-suave); }
+.pie-columna { display: flex; flex-direction: column; gap: 8px; }
+.pie-columna h5 { font-size: 13px; margin-bottom: 4px; }
+.pie-columna a { font-size: 13px; color: var(--texto-suave); }
+.pie-columna a:hover { color: var(--morado-claro); }
