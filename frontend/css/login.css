@@ -1,0 +1,87 @@
+/* ===== Casino Virtual · Página de inicio de sesión =====
+   Usa las variables y clases base de estilos.css */
+
+.acceso {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  min-height: 600px;
+}
+
+/* ===== Banner izquierdo ===== */
+.acceso-banner {
+  background: linear-gradient(135deg, #6d28d9 0%, #3b0764 55%, #1e1b4b 100%);
+  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  padding: 48px;
+}
+.acceso-banner h1 { font-size: 40px; }
+.acceso-banner .texto { max-width: 60%; line-height: 1.6; }
+
+.acceso-banner .ruleta { position: absolute; right: -80px; bottom: -110px; width: 320px; height: 320px; transform: rotate(12deg); }
+.acceso-banner .carta { position: absolute; width: 90px; height: 128px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); z-index: 1; }
+.acceso-banner .c1 { right: 150px; top: 60px; transform: rotate(-14deg); }
+.acceso-banner .c2 { right: 80px; top: 48px; transform: rotate(10deg); }
+.acceso-banner .f1 { width: 60px; height: 60px; left: 48px; bottom: 36px; right: auto; transform: rotate(-20deg); }
+.acceso-banner .f2 { width: 54px; height: 54px; right: 260px; bottom: 60px; top: auto; }
+.acceso-banner .f3 { width: 38px; height: 38px; right: 30px; top: 210px; }
+
+/* ===== Tarjeta del formulario ===== */
+.acceso-form {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  padding: 48px 44px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.acceso-form h2 { font-size: 26px; text-transform: uppercase; }
+.subtitulo { margin: 6px 0 28px; font-size: 14px; color: var(--texto-suave); }
+
+#formLogin { display: flex; flex-direction: column; gap: 18px; }
+
+.campo { display: flex; flex-direction: column; gap: 8px; }
+.campo > span { font-size: 13px; font-weight: 600; color: var(--morado-claro); }
+.campo input {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font: inherit; font-size: 14px; color: var(--texto);
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.campo input::placeholder { color: #5f5f7a; }
+.campo input:focus { border-color: var(--morado); box-shadow: 0 0 0 3px rgba(139, 92, 246, .25); }
+.campo input.error { border-color: #f43f5e; }
+
+.campo-clave { position: relative; }
+.campo-clave input { padding-right: 70px; }
+.ver-clave {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: rgba(139, 92, 246, .18); color: var(--morado-claro);
+  border: none; border-radius: 8px; padding: 6px 10px;
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.ver-clave:hover { background: rgba(139, 92, 246, .3); }
+
+.opciones { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.opciones .enlace { font-size: 13px; }
+.recordar { display: flex; align-items: center; gap: 8px; color: var(--texto-suave); cursor: pointer; }
+.recordar input { accent-color: var(--morado); width: 16px; height: 16px; }
+
+.mensaje { margin: 0; min-height: 18px; font-size: 13px; color: #fb7185; }
+.mensaje.ok { color: var(--verde); }
+
+.boton-ancho {
+  border: none; cursor: pointer; width: 100%;
+  padding: 14px 20px; font-family: var(--titulos); font-size: 15px;
+  text-transform: uppercase; letter-spacing: .08em; color: #fff;
+  transition: transform .15s, box-shadow .15s;
+}
+.boton-ancho:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(168, 85, 247, .55); }
+.boton-ancho:disabled { opacity: .6; cursor: default; transform: none; }
+
+.registro { margin: 24px 0 0; text-align: center; font-size: 14px; color: var(--texto-suave); }
+.registro a { color: var(--morado-claro); font-weight: 600; }
+.registro a b { color: var(--dorado); }
+.registro a:hover { text-decoration: underline; }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    <symbol id="carta-a" viewBox="0 0 70 100">
+        <rect x="2" y="2" width="66" height="96" rx="8" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+        <text x="10" y="24" font-size="18" font-weight="800" fill="#1e1b4b" font-family="Montserrat, sans-serif">A</text>
+        <text x="35" y="66" text-anchor="middle" font-size="34" fill="#1e1b4b">♠</text>
+    </symbol>
+    <symbol id="carta-k" viewBox="0 0 70 100">
+        <rect x="2" y="2" width="66" height="96" rx="8" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+        <text x="10" y="24" font-size="18" font-weight="800" fill="#c026d3" font-family="Montserrat, sans-serif">K</text>
+        <text x="35" y="66" text-anchor="middle" font-size="34" fill="#c026d3">♥</text>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        </div>
+        <div class="barra-der">
+        <a href="index.html" class="enlace">← Volver al inicio</a>
+        <a href="#" class="boton">Registrarse</a>
+        </div>
+    </header>
+
+    <main class="acceso">
+
+        <!-- ===== Banner lateral ===== -->
+        <section class="banner acceso-banner">
+        <p class="etiqueta">Bienvenido de vuelta</p>
+        <h1>Tus tokens<br>te están<br><span>esperando</span></h1>
+        <p class="texto">Inicia sesión para jugar Cara o cruz, Dados, Ruleta y Blackjack con tus tokens virtuales.</p>
+
+        <div class="ruleta"></div>
+        <div class="cartas">
+            <svg class="carta c1"><use href="#carta-k"/></svg>
+            <svg class="carta c2"><use href="#carta-a"/></svg>
+        </div>
+        <svg class="flotante f1"><use href="#ficha"/></svg>
+        <svg class="flotante f2"><use href="#moneda"/></svg>
+        <svg class="flotante f3"><use href="#moneda"/></svg>
+        </section>
+
+        <!-- ===== Formulario ===== -->
+        <section class="acceso-form">
+        <h2>Iniciar sesión</h2>
+        <p class="subtitulo">Ingresa con tu correo y contraseña.</p>
+
+        <form id="formLogin" novalidate>
+            <label class="campo">
+            <span>Correo electrónico</span>
+            <input type="email" name="correo" id="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+            </label>
+
+            <label class="campo">
+            <span>Contraseña</span>
+            <div class="campo-clave">
+                <input type="password" name="clave" id="clave" placeholder="••••••••" autocomplete="current-password" required minlength="6">
+                <button type="button" class="ver-clave" id="verClave" aria-label="Mostrar contraseña">Ver</button>
+            </div>
+            </label>
+
+            <div class="opciones">
+            <label class="recordar"><input type="checkbox" name="recordar"> Recordarme</label>
+            <a href="#" class="enlace">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <p class="mensaje" id="mensaje" role="alert"></p>
+
+            <button type="submit" class="boton boton-ancho">Entrar</button>
+        </form>
+
+        <p class="registro">¿No tienes cuenta? <a href="#">Regístrate y recibe <b>1,000 tokens</b></a></p>
+        </section>
+
+    </main>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>
