@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Registro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<div class="marco">
+
+    <header class="barra">
+        <div class="barra-izq">
+            <a href="index.html" class="logo">
+                <span>Casino<b>Virtual</b></span>
+            </a>
+        </div>
+
+        <div class="barra-der">
+            <a href="login.html" class="enlace">
+                ← Volver al login
+            </a>
+        </div>
+    </header>
+
+    <main class="acceso">
+
+        <section class="banner acceso-banner">
+            <p class="etiqueta">Únete al casino</p>
+
+            <h1>
+                Tu aventura<br>
+                comienza<br>
+                <span>ahora</span>
+            </h1>
+
+            <p class="texto">
+                Crea tu cuenta gratis y recibe
+                1,000 tokens virtuales para comenzar
+                a jugar.
+            </p>
+
+            <div class="ruleta"></div>
+        </section>
+
+        <section class="acceso-form">
+
+            <h2>Crear cuenta</h2>
+            <p class="subtitulo">
+                Regístrate para comenzar a jugar.
+            </p>
+
+            <form id="formRegistro">
+
+                <label class="campo">
+                    <span>Nombre completo</span>
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Tu nombre"
+                        required>
+                </label>
+
+                <label class="campo">
+                    <span>Nombre de usuario</span>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Ejemplo: Jugador123"
+                        required>
+                </label>
+
+                <label class="campo">
+                    <span>Correo electrónico</span>
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="tucorreo@ejemplo.com"
+                        required>
+                </label>
+
+                <label class="campo">
+                    <span>Contraseña</span>
+                    <input
+                        type="password"
+                        id="clave"
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required>
+                </label>
+
+                <label class="campo">
+                    <span>Confirmar contraseña</span>
+                    <input
+                        type="password"
+                        id="confirmarClave"
+                        placeholder="Repite tu contraseña"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required>
+                </label>
+
+                <p class="mensaje" id="mensaje" role="alert"></p>
+
+                <button type="submit" class="boton boton-ancho">
+                    Crear cuenta
+                </button>
+
+            </form>
+
+            <p class="registro">
+                ¿Ya tienes una cuenta?
+                <a href="login.html">Inicia sesión</a>
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module" src="js/registrar.js"></script>
+
+</body>
+</html>

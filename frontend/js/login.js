@@ -1,54 +1,45 @@
-// ===== Casino Virtual · Página de inicio de sesión =====
-// Por ahora solo valida el formulario en el navegador.
-// La autenticación real se hará con Supabase Auth cuando esté configurado
-// (la validación del navegador es solo para ayudar al usuario, no es seguridad).
 
-const formLogin = document.getElementById("formLogin");
-const inputCorreo = document.getElementById("correo");
-const inputClave = document.getElementById("clave");
-const botonVerClave = document.getElementById("verClave");
+import { supabase } from "./supabase.js";
+
+const formulario = document.getElementById("formLogin");
 const mensaje = document.getElementById("mensaje");
+const botonEntrar = formulario.querySelector('button[type="submit"]');
 
-// Mostrar u ocultar la contraseña
-botonVerClave.addEventListener("click", () => {
-  const oculta = inputClave.type === "password";
-  inputClave.type = oculta ? "text" : "password";
-  botonVerClave.textContent = oculta ? "Ocultar" : "Ver";
-  botonVerClave.setAttribute("aria-label", oculta ? "Ocultar contraseña" : "Mostrar contraseña");
-});
+formulario.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-function mostrarMensaje(texto, esExito = false) {
-  mensaje.textContent = texto;
-  mensaje.classList.toggle("ok", esExito);
-}
+    const correo = document.getElementById("correo").value.trim();
+    const clave = document.getElementById("clave").value;
 
-function validarFormulario() {
-  inputCorreo.classList.remove("error");
-  inputClave.classList.remove("error");
+    if (!correo || !clave) {
+        mensaje.textContent = "Completa todos los campos.";
+        return;
+    }
 
-  const correo = inputCorreo.value.trim();
-  const clave = inputClave.value;
+    botonEntrar.disabled = true;
+    mensaje.textContent = "Verificando usuario...";
 
-  if (!correo || !inputCorreo.checkValidity()) {
-    inputCorreo.classList.add("error");
-    return "Escribe un correo electrónico válido.";
-  }
-  if (clave.length < 6) {
-    inputClave.classList.add("error");
-    return "La contraseña debe tener al menos 6 caracteres.";
-  }
-  return null;
-}
+    try {
+        const { data, error } =
+            await supabase.auth.signInWithPassword({
+                email: correo,
+                password: clave
+            });
 
-formLogin.addEventListener("submit", (evento) => {
-  evento.preventDefault();
+        if (error) {
+            mensaje.textContent =
+                "Correo o contraseña incorrectos.";
+            return;
+        }
 
-  const error = validarFormulario();
-  if (error) {
-    mostrarMensaje(error);
-    return;
-  }
-
-  // PENDIENTE: iniciar sesión con Supabase Auth y redirigir a index.html.
-  mostrarMensaje("Formulario válido. La conexión con Supabase está pendiente.", true);
+        if (data.user) {
+            window.location.replace("index.html");
+        }
+    } catch (error) {
+        console.error(error);
+        mensaje.textContent =
+            "No se pudo conectar con Supabase.";
+    } finally {
+        botonEntrar.disabled = false;
+    }
 });

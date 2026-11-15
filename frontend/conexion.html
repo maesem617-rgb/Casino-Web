@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de conexión</title>
+</head>
+<body>
+
+    <h2>Conexión con Supabase</h2>
+    <p id="resultado">Comprobando conexión...</p>
+
+    <script type="module">
+        import { supabase } from "./js/supabase.js";
+
+        async function probarConexion() {
+            try {
+                const { data, error } = await supabase
+                    .from("juego")
+                    .select("id_juego, nombre");
+
+                if (error) {
+                    document.getElementById("resultado")
+                        .textContent = "Error: " + error.message;
+                    return;
+                }
+
+                document.getElementById("resultado")
+                    .textContent =
+                    "Conexión correcta. Juegos encontrados: " +
+                    data.length;
+
+            } catch (error) {
+                document.getElementById("resultado")
+                    .textContent = "Error: " + error.message;
+            }
+        }
+
+        probarConexion();
+    </script>
+
+</body>
+</html>

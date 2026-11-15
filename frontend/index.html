@@ -71,12 +71,18 @@
         </nav>
         </div>
         <div class="barra-der">
-        <div class="saldo">
-            <svg><use href="#moneda"/></svg>
-            <span>1,000</span>
-        </div>
-        <a href="login.html" class="enlace">Iniciar sesión</a>
-        <a href="#" class="boton">Registrarse</a>
+      <div class="saldo">
+    <svg><use href="#moneda"/></svg>
+    <span id="saldoTokens">1,000</span>
+</div>
+
+<a href="login.html" class="enlace" id="enlaceLogin">
+    Iniciar sesión
+</a>
+
+<a href="registrar.html" class="boton" id="enlaceRegistro">
+    Registrarse
+</a>
         </div>
     </header>
 
@@ -199,7 +205,12 @@
 
         
         <!-- ===== Empezar a borrar ===== -->
-        
+         </main> <!-- Cierra contenido -->
 
+    </div> <!-- Cierra cuerpo -->
+
+</div> <!-- Cierra marco -->
+        
+<script type="module" src="js/index.js"></script>
 </body>
 </html>
