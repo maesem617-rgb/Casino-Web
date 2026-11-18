@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Blackjack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="blackjack.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="../../index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        </div>
+        <div class="barra-der">
+        <div class="saldo" title="Tu saldo de tokens">
+            <svg><use href="#moneda"/></svg>
+            <span id="saldoTokens">—</span>
+        </div>
+        <a href="../../index.html" class="enlace">← Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="bj">
+
+        <div class="bj-titulo">
+        <p class="etiqueta">Juego</p>
+        <h1>Black<span>jack</span></h1>
+        <p class="bj-reglas">Llega a 21 sin pasarte. El crupier pide hasta 17. Blackjack paga 3 a 2.</p>
+        </div>
+
+        <!-- ===== Mesa ===== -->
+        <section class="mesa">
+        <div class="zona">
+            <div class="zona-cabecera">
+            <h2>Crupier</h2>
+            <span class="total" id="totalCrupier"></span>
+            </div>
+            <div class="cartas-fila" id="cartasCrupier"></div>
+        </div>
+
+        <p class="mensaje-mesa" id="mensajeMesa" role="status">Elige tu apuesta y pulsa Repartir.</p>
+
+        <div class="zona">
+            <div class="zona-cabecera">
+            <h2>Tú</h2>
+            <span class="total" id="totalJugador"></span>
+            </div>
+            <div class="cartas-fila" id="cartasJugador"></div>
+        </div>
+        </section>
+
+        <!-- ===== Controles ===== -->
+        <section class="controles">
+        <div class="apuesta">
+            <label for="apuesta">Apuesta</label>
+            <div class="apuesta-fila">
+            <input type="number" id="apuesta" min="1" step="1" value="10" inputmode="numeric">
+            <button type="button" class="ficha-rapida" data-valor="10">+10</button>
+            <button type="button" class="ficha-rapida" data-valor="50">+50</button>
+            <button type="button" class="ficha-rapida" data-valor="100">+100</button>
+            <button type="button" class="ficha-rapida" data-valor="500">+500</button>
+            <button type="button" class="ficha-rapida limpiar" id="limpiarApuesta">Limpiar</button>
+            </div>
+            <p class="mensaje-error" id="mensajeError" role="alert"></p>
+        </div>
+
+        <div class="acciones">
+            <button type="button" class="accion principal" id="btnRepartir">Repartir</button>
+            <button type="button" class="accion" id="btnPedir" disabled>Pedir</button>
+            <button type="button" class="accion" id="btnPlantarse" disabled>Plantarse</button>
+            <button type="button" class="accion" id="btnDoblar" disabled>Doblar</button>
+        </div>
+        </section>
+
+    </main>
+    </div>
+
+    <script type="module" src="blackjack.js"></script>
+</body>
+</html>
