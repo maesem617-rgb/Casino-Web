@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Mis partidas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/partidas.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html).
+         Los ids propios de esta página empiezan con "pt" y las clases con "pt-". -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        <nav class="pestanas">
+            <a href="index.html">Casino</a>
+            <a href="partidas.html" class="activa" aria-current="page">Mis partidas</a>
+        </nav>
+        </div>
+        <div class="barra-der">
+        <div class="saldo" title="Tu saldo de tokens">
+            <svg><use href="#moneda"/></svg>
+            <span id="ptSaldo">—</span>
+        </div>
+        <a href="perfil.html" class="enlace" id="ptUsuario">Mi perfil</a>
+        <a href="#" class="boton" id="ptSalir">Cerrar sesión</a>
+        </div>
+    </header>
+
+    <div class="cuerpo">
+
+        <!-- ===== Barra lateral ===== -->
+        <aside class="lateral">
+        <a href="index.html" title="Inicio">
+            <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        </a>
+        <a href="juegos/cara-cruz/index.html" title="Cara o cruz">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>
+        </a>
+        <a href="juegos/dados/index.html" title="Dados">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg>
+        </a>
+        <a href="juegos/ruleta/index.html" title="Ruleta">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg>
+        </a>
+        <a href="juegos/blackjack/index.html" title="Blackjack">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="11" height="15" rx="2"/><path d="M14 7l5 1.5a1.5 1.5 0 0 1 1 1.8L17 20"/></svg>
+        </a>
+        <a href="juegos/aviator/index.html" title="Aviator">
+            <svg viewBox="0 0 24 24"><path d="M21 4L3 11l6 2 2 6 3-4 4 3z"/><path d="M9 13l12-9"/></svg>
+        </a>
+        <span class="separador"></span>
+        <a href="partidas.html" class="activo" title="Mis partidas" aria-current="page">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </a>
+        <a href="perfil.html" title="Perfil">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+        </aside>
+
+        <main class="contenido pt">
+
+        <div class="pt-titulo">
+            <p class="etiqueta">Historial</p>
+            <h1>Mis <span>partidas</span></h1>
+        </div>
+
+        <p class="pt-aviso" id="ptCargando" role="status">Cargando tus estadísticas…</p>
+
+        <!-- Sin partidas todavía -->
+        <section class="pt-vacio" id="ptVacio" hidden>
+            <h2>Aún no has jugado ninguna partida</h2>
+            <p>Cuando juegues, aquí verás tu resumen, tus resultados por juego y cada partida.</p>
+            <a href="index.html" class="boton-mini">Elegir un juego</a>
+        </section>
+
+        <!-- ===== Resumen ===== -->
+        <section class="pt-resumen" id="ptResumen" hidden>
+            <article class="pt-tarjeta">
+            <span>Partidas jugadas</span>
+            <b id="ptTotal">0</b>
+            </article>
+            <article class="pt-tarjeta">
+            <span>Ganadas / perdidas / empates</span>
+            <b><span class="pt-verde" id="ptGanadas">0</span> / <span class="pt-rojo" id="ptPerdidas">0</span> / <span id="ptEmpates">0</span></b>
+            <small id="ptPorcentaje">0 % ganadas</small>
+            </article>
+            <article class="pt-tarjeta">
+            <span>Total apostado</span>
+            <b id="ptApostado">0</b>
+            <small>Total ganado: <span id="ptGanado">0</span></small>
+            </article>
+            <article class="pt-tarjeta">
+            <span>Balance neto</span>
+            <b id="ptBalance">0</b>
+            <small>premios − apuestas</small>
+            </article>
+            <article class="pt-tarjeta">
+            <span>Juego favorito</span>
+            <b id="ptFavorito">—</b>
+            </article>
+        </section>
+
+        <!-- ===== Por juego ===== -->
+        <section class="seccion" id="ptPorJuegoCaja" hidden>
+            <div class="seccion-titulo">
+            <h3><span class="punto-morado"></span>Por juego</h3>
+            </div>
+            <div class="pt-juegos" id="ptPorJuego"></div>
+        </section>
+
+        <!-- ===== Pestañas: partidas / movimientos ===== -->
+        <section class="seccion" id="ptDetalle" hidden>
+            <div class="pt-pestanas" role="tablist">
+            <button type="button" role="tab" class="pt-pestana activa" id="ptTabPartidas" aria-selected="true" aria-controls="ptPanelPartidas">Partidas</button>
+            <button type="button" role="tab" class="pt-pestana" id="ptTabMovimientos" aria-selected="false" aria-controls="ptPanelMovimientos">Movimientos de tokens</button>
+            </div>
+
+            <!-- Panel: partidas -->
+            <div role="tabpanel" id="ptPanelPartidas" aria-labelledby="ptTabPartidas">
+            <div class="pt-filtros">
+                <label>Juego
+                <select id="ptFiltroJuego">
+                    <option value="">Todos</option>
+                </select>
+                </label>
+                <label>Resultado
+                <select id="ptFiltroResultado">
+                    <option value="">Todos</option>
+                    <option value="GANADA">Ganada</option>
+                    <option value="PERDIDA">Perdida</option>
+                    <option value="EMPATE">Empate</option>
+                </select>
+                </label>
+            </div>
+            <table class="pt-tabla">
+                <thead>
+                <tr><th>Fecha</th><th>Juego</th><th>Apuesta</th><th>Premio</th><th>Ganancia neta</th><th>Resultado</th></tr>
+                </thead>
+                <tbody id="ptFilasPartidas"></tbody>
+            </table>
+            <p class="pt-aviso" id="ptPartidasVacio" hidden>No hay partidas con estos filtros.</p>
+            <div class="pt-paginas">
+                <button type="button" class="boton-mini" id="ptPartidasAnterior">← Anterior</button>
+                <span id="ptPartidasPagina">Página 1</span>
+                <button type="button" class="boton-mini" id="ptPartidasSiguiente">Siguiente →</button>
+            </div>
+            </div>
+
+            <!-- Panel: movimientos de tokens -->
+            <div role="tabpanel" id="ptPanelMovimientos" aria-labelledby="ptTabMovimientos" hidden>
+            <table class="pt-tabla">
+                <thead>
+                <tr><th>Fecha</th><th>Tipo</th><th>Cantidad</th><th>Saldo anterior</th><th>Saldo nuevo</th></tr>
+                </thead>
+                <tbody id="ptFilasMovimientos"></tbody>
+            </table>
+            <p class="pt-aviso" id="ptMovimientosVacio" hidden>Todavía no hay movimientos de tokens.</p>
+            <div class="pt-paginas">
+                <button type="button" class="boton-mini" id="ptMovimientosAnterior">← Anterior</button>
+                <span id="ptMovimientosPagina">Página 1</span>
+                <button type="button" class="boton-mini" id="ptMovimientosSiguiente">Siguiente →</button>
+            </div>
+            </div>
+        </section>
+
+        <p class="pt-error" id="ptError" role="alert"></p>
+
+        </main>
+    </div>
+    </div>
+
+    <script type="module" src="js/partidas.js"></script>
+</body>
+</html>
