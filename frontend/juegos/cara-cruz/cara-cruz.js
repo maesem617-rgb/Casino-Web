@@ -6,7 +6,8 @@ import { supabase } from "../../js/supabase.js";
 
 // ===== Elementos de la página =====
 const saldoTokens = document.getElementById("saldoTokens");
-const moneda = document.getElementById("moneda");
+// Ojo: no usar el id "moneda", ese es el <symbol> SVG del saldo.
+const moneda = document.getElementById("monedaJuego");
 const monedaSalto = document.getElementById("monedaSalto");
 const sombra = document.getElementById("sombra");
 const mensajeMesa = document.getElementById("mensajeMesa");

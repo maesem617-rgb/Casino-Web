@@ -38,23 +38,34 @@
   perspective: 900px;
 }
 
-/* Contenedor que sube y baja (el "salto"). La altura la controla cara-cruz.js. */
+/* Contenedor que sube y baja (el "salto"). La altura la controla cara-cruz.js.
+   Sin overflow, filter ni opacity: cualquiera de esos aplanaría el 3D. */
 .moneda-salto { transform-style: preserve-3d; }
 
-/* La moneda en sí: gira en el eje Y. El ángulo lo controla cara-cruz.js. */
-.moneda {
+/* La moneda en sí: gira en el eje Y. El ángulo lo controla cara-cruz.js
+   en cada frame (sin transition de CSS para que nada lo sobrescriba).
+   0° muestra CARA y 180° muestra CRUZ. */
+.moneda-juego {
   position: relative;
   width: 170px; height: 170px;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
+  will-change: transform;
 }
 
 .lado {
   position: absolute; inset: 0;
   border-radius: 50%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  font-family: var(--titulos); font-weight: 900; color: #92400e;
+  font-family: var(--titulos); font-weight: 900;
+}
+.lado .texto { font-size: 15px; letter-spacing: .25em; text-transform: uppercase; }
+
+/* CARA: oro claro con estrella. */
+.lado-cara {
+  color: #92400e;
   background:
     radial-gradient(circle at 35% 30%, #fef3c7 0%, #fde68a 25%, #fbbf24 60%, #b45309 100%);
   box-shadow:
@@ -63,15 +74,33 @@
     inset 0 0 0 15px rgba(180, 83, 9, .6),
     0 0 30px rgba(251, 191, 36, .35);
 }
-.lado .simbolo { font-size: 58px; line-height: 1; text-shadow: 0 2px 0 rgba(254, 243, 199, .7); }
-.lado .texto   { font-size: 16px; letter-spacing: .25em; text-transform: uppercase; }
+.lado-cara .simbolo { width: 72px; height: 72px; fill: #b45309; filter: drop-shadow(0 2px 0 rgba(254, 243, 199, .8)); }
 
-/* La cruz es la otra cara: girada 180° para verse por detrás. */
+/* CRUZ: la otra cara, girada 180° para verse por detrás.
+   Tono cobre más oscuro, anillo punteado y una cruz dibujada con CSS. */
 .lado-cruz {
   transform: rotateY(180deg);
+  color: #fef3c7;
   background:
-    radial-gradient(circle at 35% 30%, #fef3c7 0%, #fcd34d 25%, #f59e0b 60%, #92400e 100%);
+    radial-gradient(circle at 35% 30%, #fdba74 0%, #ea580c 45%, #9a3412 85%, #7c2d12 100%);
+  box-shadow:
+    inset 0 0 0 8px #7c2d12,
+    inset 0 0 0 11px #fdba74,
+    0 0 30px rgba(234, 88, 12, .35);
 }
+.lado-cruz::before {
+  content: ""; position: absolute; inset: 20px;
+  border-radius: 50%; border: 3px dashed rgba(254, 243, 199, .55);
+}
+.cruz-dibujo { position: relative; width: 64px; height: 64px; }
+.cruz-dibujo::before,
+.cruz-dibujo::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  background: #fef3c7; border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(124, 45, 18, .6);
+}
+.cruz-dibujo::before { width: 18px; height: 64px; transform: translate(-50%, -50%); }
+.cruz-dibujo::after  { width: 64px; height: 18px; transform: translate(-50%, -50%); }
 
 .sombra {
   position: absolute; bottom: 14px; left: 50%;
@@ -159,6 +188,12 @@
   background: radial-gradient(circle at 35% 30%, #fde68a, #fbbf24 60%, #b45309);
   box-shadow: inset 0 0 0 3px #d97706;
   color: #92400e; font-size: 18px;
+}
+/* La mini moneda de CRUZ usa el mismo tono cobre que la cara de cruz. */
+.lado-boton[data-lado="CRUZ"] .mini-moneda {
+  background: radial-gradient(circle at 35% 30%, #fdba74, #ea580c 55%, #7c2d12);
+  box-shadow: inset 0 0 0 3px #7c2d12;
+  color: #fef3c7;
 }
 
 .acciones { display: flex; gap: 10px; }
