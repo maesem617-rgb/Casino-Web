@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Dados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="dados.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html).
+         OJO: los ids "g-oro", "moneda" y "ficha" ya están ocupados aquí, y en el
+         index existen "dado5" y "dado3"; todos los ids propios de esta página
+         empiezan con "dd" y las clases con "dd-". -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="../../index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        </div>
+        <div class="barra-der">
+        <div class="saldo" title="Tu saldo de tokens">
+            <svg><use href="#moneda"/></svg>
+            <span id="saldoTokens">—</span>
+        </div>
+        <a href="../../index.html" class="enlace">← Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="dd">
+
+        <div class="dd-titulo">
+        <p class="etiqueta">Juego</p>
+        <h1>Da<span>dos</span></h1>
+        <p class="dd-reglas">Siete arriba, siete abajo: se tiran dos dados. Elige el valor de la ficha, haz clic en el paño para apostar y pulsa Tirar.
+            Bajo (2–6) y alto (8–12) pagan ×2 · siete y dobles ×5 · suma exacta de ×6 a ×30 según lo difícil que sea (el premio incluye tu apuesta).</p>
+        </div>
+
+        <div class="dd-cuerpo">
+
+        <!-- ===== Mesa: dados + resultado ===== -->
+        <section class="mesa dd-mesa">
+            <!-- Mesa de fieltro. Los dos dados (cubos 3D) los arma dados.js. -->
+            <div class="dd-fieltro" id="ddFieltro" aria-hidden="true"></div>
+
+            <div class="dd-resultado" id="ddResultado">
+            <div class="dd-suma-grande" id="ddSumaGrande">?</div>
+            <p class="dd-dobles-aviso" id="ddDoblesAviso" hidden>¡Dobles!</p>
+            <p class="mensaje-mesa" id="ddMensaje" role="status">Elige una ficha y haz clic en el paño.</p>
+            <ul class="dd-detalle" id="ddDetalle"></ul>
+            <div class="dd-totales" id="ddTotales" hidden>
+                <div><span>Premio total</span><b id="ddPremioTotal">0</b></div>
+                <div><span>Ganancia neta</span><b id="ddGananciaNeta">0</b></div>
+            </div>
+            </div>
+        </section>
+
+        <!-- ===== Historial ===== -->
+        <aside class="historial">
+            <h2>Tiradas de esta sesión</h2>
+            <ol class="dd-tiradas" id="ddTiradas"></ol>
+            <p class="historial-vacio" id="ddTiradasVacio">Aún no has tirado.</p>
+
+            <h2 class="dd-sub">Últimas partidas</h2>
+            <ol class="historial-lista" id="ddHistorialLista"></ol>
+            <p class="historial-vacio" id="ddHistorialVacio">Aún no has jugado.</p>
+        </aside>
+
+        </div>
+
+        <!-- ===== Paño de apuestas (las casillas las crea dados.js) ===== -->
+        <section class="dd-pano-caja">
+        <div class="dd-pano" id="ddPano" role="group" aria-label="Paño de apuestas"></div>
+        </section>
+
+        <!-- ===== Controles ===== -->
+        <section class="controles">
+        <div class="apuesta">
+            <span class="dd-etiqueta">Valor de la ficha</span>
+            <div class="apuesta-fila" role="group" aria-label="Valor de la ficha">
+            <button type="button" class="ficha-rapida dd-ficha-valor" data-valor="1" aria-pressed="false">1</button>
+            <button type="button" class="ficha-rapida dd-ficha-valor" data-valor="5" aria-pressed="false">5</button>
+            <button type="button" class="ficha-rapida dd-ficha-valor" data-valor="10" aria-pressed="true">10</button>
+            <button type="button" class="ficha-rapida dd-ficha-valor" data-valor="25" aria-pressed="false">25</button>
+            <button type="button" class="ficha-rapida dd-ficha-valor" data-valor="100" aria-pressed="false">100</button>
+            </div>
+            <p class="mensaje-error" id="ddError" role="alert"></p>
+        </div>
+
+        <div class="dd-total">
+            <span class="dd-etiqueta">Total apostado</span>
+            <b id="ddTotalApostado">0</b>
+        </div>
+
+        <div class="acciones">
+            <button type="button" class="accion" id="ddDeshacer">Deshacer última</button>
+            <button type="button" class="accion" id="ddLimpiar">Limpiar apuestas</button>
+            <button type="button" class="accion" id="ddRepetir">Repetir anterior</button>
+            <button type="button" class="accion principal" id="ddTirar" disabled>Tirar</button>
+        </div>
+        </section>
+
+    </main>
+    </div>
+
+    <script type="module" src="dados.js"></script>
+</body>
+</html>

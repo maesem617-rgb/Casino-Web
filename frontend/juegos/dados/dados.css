@@ -1,0 +1,312 @@
+/* ===== Dados · usa las variables de css/estilos.css ===== */
+/* Misma estructura visual que la Ruleta (título, mesa, paño, controles).
+   OJO: estilos.css ya usa las clases "dado", "dado-g", "d1", "d2", "g1" y "g2"
+   para las ilustraciones del index. Todas las clases propias empiezan con "dd-". */
+
+:root {
+  --dd-pano: #0f5132;
+  --dd-lado: 84px;    /* tamaño del cubo */
+  --dd-medio: 42px;   /* la mitad: cuánto se separa cada cara del centro */
+}
+
+.dd { padding: 28px 32px 36px; display: flex; flex-direction: column; gap: 24px; }
+
+.dd-titulo h1 { font-size: 34px; text-transform: uppercase; }
+.dd-titulo h1 span { color: var(--dorado); }
+.dd-reglas { margin: 6px 0 0; color: var(--texto-suave); font-size: 14px; max-width: 900px; }
+
+.dd-cuerpo { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+
+/* ===== Mesa (igual que la Ruleta) ===== */
+.mesa {
+  position: relative;
+  padding: 24px 28px;
+  border-radius: 28px;
+  background:
+    radial-gradient(700px 300px at 50% 50%, rgba(139, 92, 246, .25), transparent 70%),
+    linear-gradient(160deg, #3b0764 0%, #2e1065 55%, #1e1b4b 100%);
+  border: 6px solid #92400e;
+  box-shadow: 0 0 0 3px var(--dorado), inset 0 0 60px rgba(0, 0, 0, .55), 0 20px 50px rgba(0, 0, 0, .5);
+}
+.dd-mesa { display: grid; grid-template-columns: 420px 1fr; gap: 24px; align-items: center; }
+
+.mensaje-mesa {
+  margin: 0; text-align: center;
+  font-family: var(--titulos); font-weight: 800; font-size: 16px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--texto);
+}
+.mensaje-mesa.gana   { color: var(--dorado); text-shadow: 0 0 18px rgba(251, 191, 36, .45); }
+.mensaje-mesa.pierde { color: #fda4af; }
+
+/* ===== Fieltro y dados 3D =====
+   El fieltro tiene "perspective": todo lo que esté dentro y use 3D se ve
+   con profundidad. El punto de vista está un poco arriba (perspective-origin),
+   así se alcanza a ver la cara superior de cada cubo. */
+.dd-fieltro {
+  position: relative; height: 330px; overflow: hidden;
+  border-radius: 20px;
+  border: 8px solid #78350f;
+  box-shadow: 0 0 0 2px var(--dorado), inset 0 0 50px rgba(0, 0, 0, .6);
+  background:
+    radial-gradient(260px 160px at 50% 70%, rgba(255, 255, 255, .10), transparent 70%),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, .05) 0 2px, transparent 2px 5px),
+    radial-gradient(circle at 50% 40%, #198754, var(--dd-pano) 75%);
+  perspective: 900px;
+  perspective-origin: 50% 10%;
+}
+
+/* Cada dado tiene 3 capas, cada una con su animación (las arma dados.js):
+     .dd-carril  -> avanza de izquierda a derecha (rueda por la mesa)
+     .dd-salto   -> sube y baja (rebotes)
+     .dd-cubo    -> gira sobre sí mismo
+   La sombra está en el carril pero fuera del salto: se queda en el piso. */
+.dd-carril {
+  position: absolute; bottom: 60px;
+  width: var(--dd-lado); height: var(--dd-lado);
+  transform-style: preserve-3d;
+}
+.dd-carril.dd-uno { left: 100px; }
+.dd-carril.dd-dos { left: 236px; }
+
+.dd-sombra {
+  position: absolute; left: 4px; right: 4px; bottom: -16px; height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, .65), transparent);
+  opacity: .8;
+}
+.dd-salto, .dd-cubo { width: 100%; height: 100%; transform-style: preserve-3d; }
+.dd-cubo { position: relative; }
+
+/* Mientras se espera al servidor, los dados tiemblan "en la mano". */
+.dd-agitando .dd-salto { animation: dd-agitar .18s ease-in-out infinite alternate; }
+.dd-agitando .dd-dos .dd-salto { animation-delay: -.09s; }
+@keyframes dd-agitar {
+  from { transform: translate(-3px, -6px) rotate(-4deg); }
+  to   { transform: translate(3px, -2px) rotate(4deg); }
+}
+
+/* Caras: un cuadrado con una grilla de 3x3 donde se colocan los puntos.
+   Cada cara se gira hacia su lado y se separa del centro la mitad del cubo:
+     1 al frente · 6 atrás · 3 a la derecha · 4 a la izquierda · 2 arriba · 5 abajo
+   (las caras opuestas suman 7, como en un dado real). */
+.dd-cara {
+  position: absolute; inset: 0;
+  display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 11px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 25%, #ffffff, #e9e5f5);
+  box-shadow: inset 0 0 0 1px rgba(76, 29, 149, .15), inset 0 -6px 14px rgba(76, 29, 149, .18);
+}
+.dd-dos .dd-cara { background: radial-gradient(circle at 30% 25%, #f5f3ff, #ddd6fe); }
+
+.dd-cara-1 { transform: translateZ(var(--dd-medio)); }
+.dd-cara-6 { transform: rotateY(180deg) translateZ(var(--dd-medio)); }
+.dd-cara-3 { transform: rotateY(90deg)  translateZ(var(--dd-medio)); }
+.dd-cara-4 { transform: rotateY(-90deg) translateZ(var(--dd-medio)); }
+.dd-cara-2 { transform: rotateX(90deg)  translateZ(var(--dd-medio)); }
+.dd-cara-5 { transform: rotateX(-90deg) translateZ(var(--dd-medio)); }
+
+/* Puntos: círculos dibujados con CSS, ubicados en la grilla de 3x3. */
+.dd-punto {
+  width: 15px; height: 15px; place-self: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8b5cf6, #4c1d95 70%);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .45);
+}
+.dd-dos .dd-punto { background: radial-gradient(circle at 35% 30%, #a855f7, #6b21a8 70%); }
+.dd-p-ai { grid-area: 1 / 1; }  /* arriba izquierda */
+.dd-p-ad { grid-area: 1 / 3; }  /* arriba derecha */
+.dd-p-mi { grid-area: 2 / 1; }  /* medio izquierda */
+.dd-p-c  { grid-area: 2 / 2; }  /* centro */
+.dd-p-md { grid-area: 2 / 3; }  /* medio derecha */
+.dd-p-bi { grid-area: 3 / 1; }  /* abajo izquierda */
+.dd-p-bd { grid-area: 3 / 3; }  /* abajo derecha */
+
+/* ===== Resultado ===== */
+.dd-resultado { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+.dd-suma-grande {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--titulos); font-weight: 900; font-size: 52px; color: #fff;
+  background: var(--panel-2);
+  border: 4px solid var(--dorado);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+.dd-suma-grande.dd-bajo  { background: linear-gradient(160deg, #2563eb, #1e3a8a); }
+.dd-suma-grande.dd-siete { background: linear-gradient(160deg, #d97706, #92400e); }
+.dd-suma-grande.dd-alto  { background: linear-gradient(160deg, #c026d3, #6b21a8); }
+
+.dd-dobles-aviso {
+  margin: 0; font-family: var(--titulos); font-weight: 900; font-size: 22px;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--dorado);
+  text-shadow: 0 0 16px rgba(251, 191, 36, .6);
+  animation: dd-latido .8s ease-in-out infinite alternate;
+}
+.dd-dobles-aviso[hidden] { display: none; }
+
+.dd-detalle {
+  list-style: none; margin: 0; padding: 0; width: 100%; max-width: 300px;
+  display: flex; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;
+}
+.dd-detalle li {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
+  padding: 5px 10px; border-radius: 8px; font-size: 13px;
+  background: rgba(0, 0, 0, .3);
+}
+.dd-detalle .gana   { color: var(--dorado); font-weight: 700; }
+.dd-detalle .pierde { color: #fda4af; }
+
+.dd-totales { display: flex; gap: 14px; }
+.dd-totales[hidden] { display: none; }
+.dd-totales div {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 8px 16px; border-radius: 12px; background: rgba(0, 0, 0, .35);
+}
+.dd-totales span { font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--texto-suave); }
+.dd-totales b    { font-family: var(--titulos); font-size: 20px; }
+.dd-totales .positivo { color: var(--dorado); }
+.dd-totales .negativo { color: #fda4af; }
+
+/* ===== Historial (igual que la Ruleta) ===== */
+.historial {
+  padding: 20px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+.historial h2 {
+  margin: 0 0 12px;
+  font-size: 13px; text-transform: uppercase; letter-spacing: .15em; color: var(--morado-claro);
+}
+.historial h2.dd-sub { margin-top: 20px; }
+.historial-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.historial-lista li {
+  display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 10px;
+  background: var(--panel-2); font-size: 12px;
+}
+.historial-lista .fecha   { color: var(--texto-suave); font-size: 11px; }
+.historial-lista .monto   { font-family: var(--titulos); font-weight: 700; }
+.historial-lista .estado  { font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.historial-lista .gana    { color: var(--dorado); }
+.historial-lista .pierde  { color: #fda4af; }
+.historial-lista .empate  { color: var(--morado-claro); }
+.historial-vacio { margin: 0; color: var(--texto-suave); font-size: 13px; }
+.historial-vacio[hidden] { display: none; }
+
+/* Tiradas de la sesión: "⚃⚅ = 10" */
+.dd-tiradas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.dd-tiradas li {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  padding: 4px 10px; border-radius: 10px;
+  background: var(--panel-2); border: 1px solid transparent;
+  font-family: var(--titulos); font-weight: 800; font-size: 14px;
+}
+.dd-tiradas li:first-child { border-color: var(--dorado); box-shadow: 0 0 10px rgba(251, 191, 36, .35); }
+.dd-tiradas .dd-caras { font-size: 24px; line-height: 1; color: #fff; letter-spacing: 2px; }
+.dd-tiradas .dd-es-doble .dd-caras { color: var(--dorado); }
+
+/* ===== Paño de apuestas =====
+   10 columnas. Fila 1: BAJO (4) · SIETE (2) · ALTO (4).
+   Fila 2: DOBLES a lo ancho. Fila 3: las 10 sumas exactas. */
+.dd-pano-caja {
+  padding: 18px; border-radius: 18px;
+  background: radial-gradient(800px 200px at 50% 0%, #198754, var(--dd-pano));
+  border: 4px solid #92400e;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, .5);
+}
+.dd-pano {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 88px 56px 70px;
+  gap: 6px;
+}
+
+.dd-casilla {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  border: 2px solid rgba(255, 255, 255, .7); border-radius: 10px;
+  background: rgba(0, 0, 0, .12); color: #fff;
+  font-family: var(--titulos); font-weight: 800;
+  cursor: pointer; transition: box-shadow .15s, transform .1s;
+}
+.dd-casilla:hover:not(:disabled) { box-shadow: inset 0 0 0 100px rgba(255, 255, 255, .15); }
+.dd-casilla:active:not(:disabled) { transform: scale(.97); }
+.dd-casilla:disabled { cursor: not-allowed; }
+
+.dd-casilla-nombre { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; }
+.dd-casilla-rango  { font-size: 12px; font-weight: 700; color: rgba(255, 255, 255, .75); }
+.dd-casilla-pago   { font-size: 12px; font-weight: 800; color: var(--dorado); }
+
+.dd-casilla.dd-grande .dd-casilla-nombre { font-size: 24px; }
+.dd-casilla.dd-grande .dd-casilla-pago   { font-size: 15px; }
+.dd-casilla.dd-grande.dd-siete { background: rgba(217, 119, 6, .25); }
+.dd-casilla.dd-numero .dd-casilla-nombre { font-size: 22px; letter-spacing: 0; }
+
+/* Casillas que ganaron con la tirada */
+.dd-casilla.dd-ganadora {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px var(--dorado), 0 0 22px rgba(251, 191, 36, .8);
+  z-index: 1;
+  animation: dd-latido 1s ease-in-out infinite alternate;
+}
+@keyframes dd-latido { from { transform: scale(1); } to { transform: scale(1.04); } }
+
+/* Ficha puesta sobre una casilla, con la cantidad */
+.dd-ficha-puesta {
+  position: absolute; right: 4px; top: 4px;
+  min-width: 30px; height: 30px; padding: 0 4px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: var(--morado-medio); color: #fff;
+  border: 3px dashed rgba(255, 255, 255, .9);
+  font-family: var(--titulos); font-weight: 800; font-size: 11px; letter-spacing: 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .55);
+  pointer-events: none;
+}
+
+/* ===== Controles (iguales a la Ruleta) ===== */
+.controles {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  padding: 20px 24px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+
+.dd-etiqueta {
+  display: block; margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--dorado);
+}
+.apuesta-fila { display: flex; align-items: center; gap: 8px; }
+
+.ficha-rapida {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 4px dashed rgba(255, 255, 255, .85);
+  background: var(--morado-medio); color: #fff;
+  font-family: var(--titulos); font-weight: 800; font-size: 14px;
+  cursor: pointer; transition: transform .15s, box-shadow .15s;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .4);
+}
+.ficha-rapida:hover:not(:disabled) { transform: translateY(-3px); }
+.ficha-rapida[aria-pressed="true"] {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 3px var(--dorado), 0 8px 18px rgba(0, 0, 0, .5);
+}
+.ficha-rapida:disabled { opacity: .4; cursor: not-allowed; }
+
+.mensaje-error { margin: 8px 0 0; min-height: 18px; font-size: 13px; color: #fda4af; }
+
+.dd-total b { font-family: var(--titulos); font-size: 28px; }
+
+.acciones { display: flex; gap: 10px; align-items: center; }
+.accion {
+  padding: 12px 18px; border-radius: 999px; cursor: pointer;
+  background: var(--panel-2); border: 1px solid var(--borde); color: var(--texto);
+  font-family: var(--cuerpo); font-weight: 700; font-size: 14px;
+  transition: border-color .15s, transform .15s;
+}
+.accion:hover:not(:disabled) { border-color: var(--morado-claro); transform: translateY(-2px); }
+.accion.principal {
+  padding: 16px 40px; font-size: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  box-shadow: 0 6px 18px rgba(168, 85, 247, .4);
+}
+.accion:disabled { opacity: .35; cursor: not-allowed; transform: none; }
