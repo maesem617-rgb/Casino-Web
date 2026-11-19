@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Aviator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="aviator.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html).
+         OJO: los ids "g-oro", "moneda" y "ficha" ya están ocupados aquí;
+         todos los ids propios de Aviator empiezan con "av". -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="../../index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        </div>
+        <div class="barra-der">
+        <div class="saldo" title="Tu saldo de tokens">
+            <svg><use href="#moneda"/></svg>
+            <span id="avSaldo">—</span>
+        </div>
+        <a href="../../index.html" class="enlace">← Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="av">
+
+        <div class="av-titulo">
+        <p class="etiqueta">Juego</p>
+        <h1>Avia<span>tor</span></h1>
+        <p class="av-reglas">Apuesta y despega: el multiplicador sube mientras vuelas. En la ruta hay tormentas y algunas
+            son fatales, pero nadie sabe cuáles hasta cruzarlas. Retírate a tiempo y cobras tu apuesta × el multiplicador;
+            si una tormenta te derriba, pierdes lo apostado. Al llegar a 50× te retiras solo.</p>
+        </div>
+
+        <div class="av-cuerpo">
+
+        <!-- ===== Cielo: lo dibuja aviator.js ===== -->
+        <section class="av-mesa">
+            <div class="av-pantalla">
+            <canvas class="av-cielo" id="avCielo" aria-label="Vuelo del avión con tormentas"></canvas>
+            <div class="av-multiplicador" id="avMultiplicador">1.00×</div>
+            <div class="av-aviso" id="avAviso" hidden></div>
+            </div>
+            <p class="av-mensaje" id="avMensaje" role="status">Cargando…</p>
+        </section>
+
+        <!-- ===== Historial ===== -->
+        <aside class="av-historial">
+            <h2>Últimas partidas</h2>
+            <ol class="av-historial-lista" id="avHistorialLista"></ol>
+            <p class="av-historial-vacio" id="avHistorialVacio">Aún no has jugado.</p>
+        </aside>
+
+        </div>
+
+        <!-- ===== Controles ===== -->
+        <section class="av-controles">
+        <div class="av-apuesta">
+            <label class="av-etiqueta" for="avApuesta">Apuesta</label>
+            <div class="av-apuesta-fila">
+            <input type="number" id="avApuesta" min="1" step="1" value="10" inputmode="numeric">
+            <button type="button" class="av-ficha" data-valor="10">+10</button>
+            <button type="button" class="av-ficha" data-valor="50">+50</button>
+            <button type="button" class="av-ficha" data-valor="100">+100</button>
+            <button type="button" class="av-ficha" data-valor="500">+500</button>
+            <button type="button" class="av-ficha av-limpiar" id="avLimpiar">Limpiar</button>
+            </div>
+            <p class="av-error" id="avError" role="alert"></p>
+        </div>
+
+        <div class="av-acciones">
+            <button type="button" class="av-boton av-despegar" id="avDespegar" disabled>Apostar y despegar</button>
+            <button type="button" class="av-boton av-retirarse" id="avRetirarse" disabled>
+            <span>Retirarse</span>
+            <small id="avGanancia">—</small>
+            </button>
+        </div>
+        </section>
+
+    </main>
+    </div>
+
+    <script type="module" src="aviator.js"></script>
+</body>
+</html>
