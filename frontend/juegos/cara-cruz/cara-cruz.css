@@ -1,0 +1,213 @@
+/* ===== Cara o cruz · usa las variables de css/estilos.css ===== */
+/* Misma estructura visual que el Blackjack (título, mesa, controles). */
+
+.cc { padding: 28px 32px 36px; display: flex; flex-direction: column; gap: 24px; }
+
+.cc-titulo h1 { font-size: 34px; text-transform: uppercase; }
+.cc-titulo h1 span { color: var(--dorado); }
+.cc-reglas { margin: 6px 0 0; color: var(--texto-suave); font-size: 14px; }
+
+.cc-cuerpo { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+
+/* ===== Mesa ===== */
+.mesa {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+  padding: 28px 36px;
+  border-radius: 28px;
+  background:
+    radial-gradient(700px 300px at 50% 50%, rgba(139, 92, 246, .25), transparent 70%),
+    linear-gradient(160deg, #3b0764 0%, #2e1065 55%, #1e1b4b 100%);
+  border: 6px solid #92400e;
+  box-shadow: 0 0 0 3px var(--dorado), inset 0 0 60px rgba(0, 0, 0, .55), 0 20px 50px rgba(0, 0, 0, .5);
+}
+
+.mensaje-mesa {
+  margin: 0; text-align: center;
+  font-family: var(--titulos); font-weight: 800; font-size: 20px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--texto);
+}
+.mensaje-mesa.gana   { color: var(--dorado); text-shadow: 0 0 18px rgba(251, 191, 36, .45); }
+.mensaje-mesa.pierde { color: #fda4af; }
+
+/* ===== Moneda 3D (solo CSS) ===== */
+.escena {
+  position: relative;
+  width: 220px; height: 260px;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 900px;
+}
+
+/* Contenedor que sube y baja (el "salto"). La altura la controla cara-cruz.js.
+   Sin overflow, filter ni opacity: cualquiera de esos aplanaría el 3D. */
+.moneda-salto { transform-style: preserve-3d; }
+
+/* La moneda en sí: gira en el eje Y. El ángulo lo controla cara-cruz.js
+   en cada frame (sin transition de CSS para que nada lo sobrescriba).
+   0° muestra CARA y 180° muestra CRUZ. */
+.moneda-juego {
+  position: relative;
+  width: 170px; height: 170px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  will-change: transform;
+}
+
+.lado {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  font-family: var(--titulos); font-weight: 900;
+}
+.lado .texto { font-size: 15px; letter-spacing: .25em; text-transform: uppercase; }
+
+/* CARA: oro claro con estrella. */
+.lado-cara {
+  color: #92400e;
+  background:
+    radial-gradient(circle at 35% 30%, #fef3c7 0%, #fde68a 25%, #fbbf24 60%, #b45309 100%);
+  box-shadow:
+    inset 0 0 0 8px #d97706,
+    inset 0 0 0 12px #fde68a,
+    inset 0 0 0 15px rgba(180, 83, 9, .6),
+    0 0 30px rgba(251, 191, 36, .35);
+}
+.lado-cara .simbolo { width: 72px; height: 72px; fill: #b45309; filter: drop-shadow(0 2px 0 rgba(254, 243, 199, .8)); }
+
+/* CRUZ: la otra cara, girada 180° para verse por detrás.
+   Tono cobre más oscuro, anillo punteado y una cruz dibujada con CSS. */
+.lado-cruz {
+  transform: rotateY(180deg);
+  color: #fef3c7;
+  background:
+    radial-gradient(circle at 35% 30%, #fdba74 0%, #ea580c 45%, #9a3412 85%, #7c2d12 100%);
+  box-shadow:
+    inset 0 0 0 8px #7c2d12,
+    inset 0 0 0 11px #fdba74,
+    0 0 30px rgba(234, 88, 12, .35);
+}
+.lado-cruz::before {
+  content: ""; position: absolute; inset: 20px;
+  border-radius: 50%; border: 3px dashed rgba(254, 243, 199, .55);
+}
+.cruz-dibujo { position: relative; width: 64px; height: 64px; }
+.cruz-dibujo::before,
+.cruz-dibujo::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  background: #fef3c7; border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(124, 45, 18, .6);
+}
+.cruz-dibujo::before { width: 18px; height: 64px; transform: translate(-50%, -50%); }
+.cruz-dibujo::after  { width: 64px; height: 18px; transform: translate(-50%, -50%); }
+
+.sombra {
+  position: absolute; bottom: 14px; left: 50%;
+  width: 130px; height: 18px; margin-left: -65px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .45);
+  filter: blur(4px);
+}
+
+/* ===== Historial ===== */
+.historial {
+  padding: 20px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+.historial h2 {
+  margin: 0 0 12px;
+  font-size: 13px; text-transform: uppercase; letter-spacing: .15em; color: var(--morado-claro);
+}
+.historial-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.historial-lista li {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 10px;
+  background: var(--panel-2); font-size: 13px;
+}
+.historial-lista .fecha   { color: var(--texto-suave); font-size: 12px; }
+.historial-lista .monto   { font-family: var(--titulos); font-weight: 700; }
+.historial-lista .estado  { font-weight: 700; font-size: 12px; text-transform: uppercase; }
+.historial-lista .gana    { color: var(--dorado); }
+.historial-lista .pierde  { color: #fda4af; }
+.historial-vacio { margin: 0; color: var(--texto-suave); font-size: 13px; }
+.historial-vacio[hidden] { display: none; }
+
+/* ===== Controles (iguales al Blackjack) ===== */
+.controles {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  padding: 20px 24px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+
+.apuesta label {
+  display: block; margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--dorado);
+}
+.apuesta-fila { display: flex; align-items: center; gap: 8px; }
+.apuesta input {
+  width: 120px; padding: 10px 14px; border-radius: 12px;
+  background: var(--panel-2); border: 1px solid var(--borde); color: var(--texto);
+  font-family: var(--titulos); font-weight: 700; font-size: 16px;
+}
+.apuesta input:focus { outline: none; border-color: var(--morado); }
+.apuesta input:disabled { opacity: .5; }
+
+.ficha-rapida {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 4px dashed rgba(255, 255, 255, .85);
+  background: var(--morado-medio); color: #fff;
+  font-family: var(--titulos); font-weight: 800; font-size: 12px;
+  cursor: pointer; transition: transform .15s;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .4);
+}
+.ficha-rapida:hover:not(:disabled) { transform: translateY(-3px); }
+.ficha-rapida.limpiar { width: auto; height: auto; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--borde); background: var(--panel-2); color: var(--texto-suave); box-shadow: none; }
+.ficha-rapida:disabled { opacity: .4; cursor: not-allowed; }
+
+.mensaje-error { margin: 8px 0 0; min-height: 18px; font-size: 13px; color: #fda4af; }
+
+/* Botones grandes para elegir el lado */
+.eleccion { display: flex; gap: 14px; }
+.lado-boton {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 28px; border-radius: 18px; cursor: pointer;
+  background: var(--panel-2); border: 2px solid var(--borde); color: var(--texto);
+  font-family: var(--titulos); font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: .08em;
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.lado-boton:hover:not(:disabled) { border-color: var(--morado-claro); transform: translateY(-2px); }
+.lado-boton[aria-pressed="true"] {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, .25), 0 8px 20px rgba(0, 0, 0, .4);
+}
+.lado-boton:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+.mini-moneda {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 35% 30%, #fde68a, #fbbf24 60%, #b45309);
+  box-shadow: inset 0 0 0 3px #d97706;
+  color: #92400e; font-size: 18px;
+}
+/* La mini moneda de CRUZ usa el mismo tono cobre que la cara de cruz. */
+.lado-boton[data-lado="CRUZ"] .mini-moneda {
+  background: radial-gradient(circle at 35% 30%, #fdba74, #ea580c 55%, #7c2d12);
+  box-shadow: inset 0 0 0 3px #7c2d12;
+  color: #fef3c7;
+}
+
+.acciones { display: flex; gap: 10px; }
+.accion {
+  padding: 12px 22px; border-radius: 999px; cursor: pointer;
+  background: var(--panel-2); border: 1px solid var(--borde); color: var(--texto);
+  font-family: var(--cuerpo); font-weight: 700; font-size: 14px;
+  transition: border-color .15s, transform .15s;
+}
+.accion:hover:not(:disabled) { border-color: var(--morado-claro); transform: translateY(-2px); }
+.accion.principal {
+  padding: 16px 40px; font-size: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  box-shadow: 0 6px 18px rgba(168, 85, 247, .4);
+}
+.accion:disabled { opacity: .35; cursor: not-allowed; transform: none; }
