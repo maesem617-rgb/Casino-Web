@@ -1,0 +1,248 @@
+/* ===== Ruleta · usa las variables de css/estilos.css ===== */
+/* Misma estructura visual que Cara o cruz y Blackjack (título, mesa, controles).
+   OJO: no usar la clase "ruleta", estilos.css ya la usa para la ilustración del index.
+   Todas las clases propias empiezan con "rl-". */
+
+:root {
+  --rl-rojo: #dc2626;
+  --rl-negro: #18181b;
+  --rl-verde: #15803d;
+  --rl-pano: #0f5132;
+}
+
+.rl { padding: 28px 32px 36px; display: flex; flex-direction: column; gap: 24px; }
+
+.rl-titulo h1 { font-size: 34px; text-transform: uppercase; }
+.rl-titulo h1 span { color: var(--dorado); }
+.rl-reglas { margin: 6px 0 0; color: var(--texto-suave); font-size: 14px; max-width: 900px; }
+
+.rl-cuerpo { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+
+/* ===== Mesa (igual que Cara o cruz) ===== */
+.mesa {
+  position: relative;
+  padding: 24px 28px;
+  border-radius: 28px;
+  background:
+    radial-gradient(700px 300px at 50% 50%, rgba(139, 92, 246, .25), transparent 70%),
+    linear-gradient(160deg, #3b0764 0%, #2e1065 55%, #1e1b4b 100%);
+  border: 6px solid #92400e;
+  box-shadow: 0 0 0 3px var(--dorado), inset 0 0 60px rgba(0, 0, 0, .55), 0 20px 50px rgba(0, 0, 0, .5);
+}
+.rl-mesa { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: center; }
+
+.mensaje-mesa {
+  margin: 0; text-align: center;
+  font-family: var(--titulos); font-weight: 800; font-size: 16px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--texto);
+}
+.mensaje-mesa.gana   { color: var(--dorado); text-shadow: 0 0 18px rgba(251, 191, 36, .45); }
+.mensaje-mesa.pierde { color: #fda4af; }
+
+/* ===== Rueda (SVG dibujado por ruleta.js) ===== */
+.rl-rueda-caja { width: 380px; height: 390px; }
+.rl-rueda { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.rl-borde-madera { fill: #78350f; stroke: #fbbf24; stroke-width: 3; }
+.rl-pista        { fill: #451a03; }
+.rl-casilla      { stroke: #fbbf24; stroke-width: 1; }
+.rl-casilla.rojo  { fill: var(--rl-rojo); }
+.rl-casilla.negro { fill: var(--rl-negro); }
+.rl-casilla.verde { fill: var(--rl-verde); }
+.rl-casilla-num  {
+  fill: #fff; font-family: var(--titulos); font-weight: 800; font-size: 15px;
+  text-anchor: middle; dominant-baseline: central;
+}
+.rl-cono      { fill: url(#g-oro); stroke: #92400e; stroke-width: 3; }
+.rl-cono-int  { fill: #78350f; stroke: #fde68a; stroke-width: 2; }
+.rl-radio     { stroke: #fde68a; stroke-width: 6; stroke-linecap: round; }
+.rl-bola      { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .6)); }
+.rl-marcador  { fill: var(--dorado); stroke: #92400e; stroke-width: 2; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .6)); }
+
+/* ===== Resultado ===== */
+.rl-resultado { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+.rl-numero-grande {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--titulos); font-weight: 900; font-size: 48px; color: #fff;
+  background: var(--panel-2);
+  border: 4px solid var(--dorado);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+.rl-numero-grande.rojo  { background: var(--rl-rojo); }
+.rl-numero-grande.negro { background: var(--rl-negro); }
+.rl-numero-grande.verde { background: var(--rl-verde); }
+
+.rl-color-grande {
+  margin: 0; font-family: var(--titulos); font-weight: 900; font-size: 22px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--morado-claro);
+}
+
+.rl-detalle {
+  list-style: none; margin: 0; padding: 0; width: 100%; max-width: 360px;
+  display: flex; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;
+}
+.rl-detalle li {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
+  padding: 5px 10px; border-radius: 8px; font-size: 13px;
+  background: rgba(0, 0, 0, .3);
+}
+.rl-detalle .gana   { color: var(--dorado); font-weight: 700; }
+.rl-detalle .pierde { color: #fda4af; }
+
+.rl-totales { display: flex; gap: 14px; }
+.rl-totales[hidden] { display: none; }
+.rl-totales div {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 8px 16px; border-radius: 12px; background: rgba(0, 0, 0, .35);
+}
+.rl-totales span { font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--texto-suave); }
+.rl-totales b    { font-family: var(--titulos); font-size: 20px; }
+.rl-totales .positivo { color: var(--dorado); }
+.rl-totales .negativo { color: #fda4af; }
+
+/* ===== Historial (igual que Cara o cruz) ===== */
+.historial {
+  padding: 20px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+.historial h2 {
+  margin: 0 0 12px;
+  font-size: 13px; text-transform: uppercase; letter-spacing: .15em; color: var(--morado-claro);
+}
+.historial h2.rl-sub { margin-top: 20px; }
+.historial-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.historial-lista li {
+  display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 10px;
+  background: var(--panel-2); font-size: 12px;
+}
+.historial-lista .fecha   { color: var(--texto-suave); font-size: 11px; }
+.historial-lista .monto   { font-family: var(--titulos); font-weight: 700; }
+.historial-lista .estado  { font-weight: 700; font-size: 11px; text-transform: uppercase; }
+.historial-lista .gana    { color: var(--dorado); }
+.historial-lista .pierde  { color: #fda4af; }
+.historial-lista .empate  { color: var(--morado-claro); }
+.historial-vacio { margin: 0; color: var(--texto-suave); font-size: 13px; }
+.historial-vacio[hidden] { display: none; }
+
+.rl-bolitas { display: flex; flex-wrap: wrap; gap: 6px; }
+.rl-bolita {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--titulos); font-weight: 800; font-size: 13px; color: #fff;
+  border: 2px solid rgba(255, 255, 255, .25);
+}
+.rl-bolita:first-child { border-color: var(--dorado); box-shadow: 0 0 10px rgba(251, 191, 36, .5); }
+.rl-bolita.rojo  { background: var(--rl-rojo); }
+.rl-bolita.negro { background: var(--rl-negro); }
+.rl-bolita.verde { background: var(--rl-verde); }
+
+/* ===== Paño de apuestas ===== */
+.rl-pano-caja {
+  padding: 18px; border-radius: 18px;
+  background: radial-gradient(800px 200px at 50% 0%, #198754, var(--rl-pano));
+  border: 4px solid #92400e;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, .5);
+}
+
+/* 1 columna para el 0, 12 para los números y 1 para las columnas "2 a 1".
+   Filas: 3 de números, 1 de docenas y 1 de apuestas exteriores. */
+.rl-pano {
+  display: grid;
+  grid-template-columns: 60px repeat(12, 1fr) 70px;
+  grid-template-rows: repeat(3, 54px) 46px 46px;
+  gap: 3px;
+}
+
+.rl-casilla-pano {
+  position: relative;
+  display: grid; place-items: center;
+  border: 2px solid rgba(255, 255, 255, .7); border-radius: 6px;
+  background: transparent; color: #fff;
+  font-family: var(--titulos); font-weight: 800; font-size: 16px;
+  cursor: pointer; transition: box-shadow .15s, transform .1s;
+}
+.rl-casilla-pano:hover:not(:disabled) { box-shadow: inset 0 0 0 100px rgba(255, 255, 255, .15); }
+.rl-casilla-pano:active:not(:disabled) { transform: scale(.97); }
+.rl-casilla-pano:disabled { cursor: not-allowed; }
+.rl-casilla-pano.rojo  { background: var(--rl-rojo); }
+.rl-casilla-pano.negro { background: var(--rl-negro); }
+.rl-casilla-pano.verde { background: var(--rl-verde); }
+.rl-casilla-pano.exterior { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* Rombos de color en las casillas ROJO / NEGRO */
+.rl-rombo { width: 26px; height: 26px; transform: rotate(45deg); border: 2px solid #fff; }
+.rl-rombo.rojo  { background: var(--rl-rojo); }
+.rl-rombo.negro { background: var(--rl-negro); }
+
+/* Casilla del número ganador y casillas exteriores que acertaron */
+.rl-casilla-pano.ganadora {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px var(--dorado), 0 0 22px rgba(251, 191, 36, .8);
+  z-index: 1;
+  animation: rl-latido 1s ease-in-out infinite alternate;
+}
+.rl-casilla-pano.acierto { border-color: var(--dorado); box-shadow: inset 0 0 0 2px var(--dorado); }
+@keyframes rl-latido { from { transform: scale(1); } to { transform: scale(1.06); } }
+
+/* Ficha puesta sobre una casilla, con la cantidad */
+.rl-ficha-puesta {
+  position: absolute; right: 2px; top: 2px;
+  min-width: 28px; height: 28px; padding: 0 4px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: var(--morado-medio); color: #fff;
+  border: 3px dashed rgba(255, 255, 255, .9);
+  font-family: var(--titulos); font-weight: 800; font-size: 11px; letter-spacing: 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .55);
+  pointer-events: none;
+}
+
+/* ===== Controles (iguales a Cara o cruz) ===== */
+.controles {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  padding: 20px 24px; border-radius: 18px;
+  background: var(--panel); border: 1px solid var(--borde);
+}
+
+.rl-etiqueta {
+  display: block; margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--dorado);
+}
+.apuesta-fila { display: flex; align-items: center; gap: 8px; }
+
+.ficha-rapida {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 4px dashed rgba(255, 255, 255, .85);
+  background: var(--morado-medio); color: #fff;
+  font-family: var(--titulos); font-weight: 800; font-size: 14px;
+  cursor: pointer; transition: transform .15s, box-shadow .15s;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .4);
+}
+.ficha-rapida:hover:not(:disabled) { transform: translateY(-3px); }
+.ficha-rapida[aria-pressed="true"] {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 3px var(--dorado), 0 8px 18px rgba(0, 0, 0, .5);
+}
+.ficha-rapida:disabled { opacity: .4; cursor: not-allowed; }
+
+.mensaje-error { margin: 8px 0 0; min-height: 18px; font-size: 13px; color: #fda4af; }
+
+.rl-total b { font-family: var(--titulos); font-size: 28px; }
+
+.acciones { display: flex; gap: 10px; align-items: center; }
+.accion {
+  padding: 12px 18px; border-radius: 999px; cursor: pointer;
+  background: var(--panel-2); border: 1px solid var(--borde); color: var(--texto);
+  font-family: var(--cuerpo); font-weight: 700; font-size: 14px;
+  transition: border-color .15s, transform .15s;
+}
+.accion:hover:not(:disabled) { border-color: var(--morado-claro); transform: translateY(-2px); }
+.accion.principal {
+  padding: 16px 40px; font-size: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  box-shadow: 0 6px 18px rgba(168, 85, 247, .4);
+}
+.accion:disabled { opacity: .35; cursor: not-allowed; transform: none; }
