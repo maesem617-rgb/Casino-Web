@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CasinoVirtual · Aviator</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet"
+          href="../../css/estilos.css">
+
+    <!-- Estilos de Aviator -->
+    <link rel="stylesheet"
+          href="aviator.css">
+</head>
+
+<body>
+
+    <div class="marco">
+
+        <!-- ENCABEZADO -->
+        <header class="barra">
+
+            <div class="barra-izq">
+                <a href="../../index.html" class="logo">
+                    <span>Casino<b>Virtual</b></span>
+                </a>
+            </div>
+
+            <div class="barra-der">
+
+                <!-- SALDO DEL USUARIO -->
+                <div class="aviator-saldo">
+                    <span>Mi saldo:</span>
+
+                    <strong id="saldoAviator">
+                        Cargando...
+                    </strong>
+
+                    <span>tokens</span>
+                </div>
+
+                <a href="../../index.html" class="enlace">
+                    Volver al casino
+                </a>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="aviator">
+
+            <!-- TÍTULO -->
+            <section class="aviator-titulo">
+
+                <p>JUEGO</p>
+
+                <h1>AVIATOR</h1>
+
+                <p>
+                    Apuesta tokens y retíralos antes
+                    de que el avión se estrelle.
+                </p>
+
+            </section>
+
+            <!-- PANTALLA DE VUELO -->
+            <section class="aviator-pantalla">
+
+                <div class="multiplicador"
+                     id="multiplicador">
+                    1.00x
+                </div>
+
+                <div class="zona-vuelo"
+                     id="zonaVuelo">
+
+                    <!-- EXPLOSIÓN -->
+                    <div class="explosion"
+                         id="explosion"
+                         aria-hidden="true">
+                    </div>
+
+                    <!-- ESTELA DEL AVIÓN -->
+                    <svg class="estela-avion"
+                         id="estelaAvion"
+                         aria-hidden="true">
+
+                        <path id="rutaAvion" d=""></path>
+
+                    </svg>
+
+                    <!-- AVIÓN -->
+                    <div class="avion" id="avion">
+
+                        <svg class="avion-svg"
+                             viewBox="0 0 220 110"
+                             xmlns="http://www.w3.org/2000/svg"
+                             role="img"
+                             aria-label="Avión en vuelo">
+
+                            <defs>
+                                <linearGradient
+                                    id="fuselaje"
+                                    x1="0" y1="0"
+                                    x2="1" y2="1">
+
+                                    <stop offset="0%"
+                                          stop-color="#ff7777"/>
+
+                                    <stop offset="55%"
+                                          stop-color="#e52c55"/>
+
+                                    <stop offset="100%"
+                                          stop-color="#8e174c"/>
+
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Ala trasera -->
+                            <path
+                                d="M55 61 L18 91 L64 78 L88 59"
+                                fill="#a21c5b"
+                                stroke="#ff92bd"
+                                stroke-width="2"/>
+
+                            <!-- Ala superior -->
+                            <path
+                                d="M102 53 L65 12 L94 18 L143 48"
+                                fill="#9d1959"
+                                stroke="#ff8db9"
+                                stroke-width="2"/>
+
+                            <!-- Cuerpo del avión -->
+                            <path
+                                d="M24 62
+                                   Q70 46 160 40
+                                   Q186 37 196 51
+                                   Q183 65 150 68
+                                   L50 78 Z"
+                                fill="url(#fuselaje)"
+                                stroke="#ffb3cc"
+                                stroke-width="3"/>
+
+                            <!-- Cabina -->
+                            <path
+                                d="M130 42
+                                   Q143 25 163 33
+                                   L174 44 Z"
+                                fill="#a6e8ff"
+                                stroke="#ffffff"
+                                stroke-width="2"/>
+
+                            <!-- Ala delantera -->
+                            <path
+                                d="M100 60
+                                   L61 102
+                                   L91 99
+                                   L146 60"
+                                fill="#f44a81"
+                                stroke="#ffb3cc"
+                                stroke-width="2"/>
+
+                            <!-- Hélice -->
+                            <g transform="translate(198 52)">
+
+                                <g class="helice">
+                                    <ellipse
+                                        cx="0" cy="0"
+                                        rx="4" ry="38"
+                                        fill="#d9c8ff"
+                                        opacity="0.75"/>
+                                </g>
+
+                                <circle
+                                    cx="0" cy="0"
+                                    r="7"
+                                    fill="#ffcf49"/>
+
+                            </g>
+
+                            <!-- Reflejo -->
+                            <path
+                                d="M53 62 Q99 50 151 47"
+                                fill="none"
+                                stroke="#ffd3e2"
+                                stroke-width="3"
+                                opacity="0.7"/>
+
+                        </svg>
+
+                    </div>
+                    <!-- FIN DEL AVIÓN -->
+
+                </div>
+
+                <!-- MENSAJES -->
+                <p id="mensaje" aria-live="polite">
+                    Esperando una nueva partida...
+                </p>
+
+            </section>
+
+            <!-- CONTROLES -->
+            <section class="aviator-controles">
+
+                <label for="apuesta">
+                    Tu apuesta
+                </label>
+
+                <input
+                    type="number"
+                    id="apuesta"
+                    min="1"
+                    step="1"
+                    value="10"
+                >
+
+                <button
+                    id="btnApostar"
+                    type="button">
+                    Apostar y despegar
+                </button>
+
+                <button
+                    id="btnRetirar"
+                    type="button"
+                    disabled>
+                    Retirar tokens
+                </button>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- CONEXIÓN JAVASCRIPT -->
+    <script type="module" src="aviator.js"></script>
+
+</body>
+</html>
