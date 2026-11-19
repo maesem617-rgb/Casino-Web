@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Virtual · Perfil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+    <!-- Ilustraciones reutilizables (mismas que en index.html).
+         Los ids propios de esta página empiezan con "pf" y las clases con "pf-". -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="g-oro" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fde68a"/>
+        <stop offset=".5" stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#b45309"/>
+        </linearGradient>
+    </defs>
+    <symbol id="moneda" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="url(#g-oro)"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#b45309" stroke-width="4" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-size="40" font-weight="900" fill="#92400e" font-family="Montserrat, sans-serif">T</text>
+    </symbol>
+    <symbol id="ficha" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#7c3aed"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#fff" stroke-width="9" stroke-dasharray="14 11"/>
+        <circle cx="50" cy="50" r="28" fill="#5b21b6" stroke="#c4b5fd" stroke-width="3"/>
+    </symbol>
+    </svg>
+
+    <div class="marco">
+
+    <!-- ===== Barra superior ===== -->
+    <header class="barra">
+        <div class="barra-izq">
+        <a href="index.html" class="logo">
+            <svg class="logo-icono"><use href="#ficha"/></svg>
+            <span>Casino<b>Virtual</b></span>
+        </a>
+        <nav class="pestanas">
+            <a href="index.html">Casino</a>
+            <a href="partidas.html">Mis partidas</a>
+        </nav>
+        </div>
+        <div class="barra-der">
+        <div class="saldo" title="Tu saldo de tokens">
+            <svg><use href="#moneda"/></svg>
+            <span id="pfSaldo">—</span>
+        </div>
+        <a href="perfil.html" class="enlace" id="pfUsuario" aria-current="page">Mi perfil</a>
+        <a href="#" class="boton" id="pfSalirBarra">Cerrar sesión</a>
+        </div>
+    </header>
+
+    <div class="cuerpo">
+
+        <!-- ===== Barra lateral ===== -->
+        <aside class="lateral">
+        <a href="index.html" title="Inicio">
+            <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        </a>
+        <a href="juegos/cara-cruz/index.html" title="Cara o cruz">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>
+        </a>
+        <a href="juegos/dados/index.html" title="Dados">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg>
+        </a>
+        <a href="juegos/ruleta/index.html" title="Ruleta">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg>
+        </a>
+        <a href="juegos/blackjack/index.html" title="Blackjack">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="11" height="15" rx="2"/><path d="M14 7l5 1.5a1.5 1.5 0 0 1 1 1.8L17 20"/></svg>
+        </a>
+        <a href="juegos/aviator/index.html" title="Aviator">
+            <svg viewBox="0 0 24 24"><path d="M21 4L3 11l6 2 2 6 3-4 4 3z"/><path d="M9 13l12-9"/></svg>
+        </a>
+        <span class="separador"></span>
+        <a href="partidas.html" title="Mis partidas">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </a>
+        <a href="perfil.html" class="activo" title="Perfil" aria-current="page">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </a>
+        </aside>
+
+        <main class="contenido pf">
+
+        <!-- ===== Cabecera del perfil ===== -->
+        <section class="pf-cabecera">
+            <div class="pf-avatar" id="pfAvatar" aria-hidden="true">?</div>
+            <div class="pf-datos">
+            <h1 id="pfNombre">Cargando…</h1>
+            <p class="pf-username">@<span id="pfUsername"></span></p>
+            <p class="pf-correo" id="pfCorreo"></p>
+            <p class="pf-miembro" id="pfMiembro"></p>
+            </div>
+            <div class="pf-tokens">
+            <span>Tokens actuales</span>
+            <b><svg><use href="#moneda"/></svg><span id="pfTokens">—</span></b>
+            </div>
+        </section>
+
+        <!-- ===== Resumen de estadísticas ===== -->
+        <section class="pf-stats">
+            <article class="pf-tarjeta"><span>Partidas</span><b id="pfPartidas">—</b></article>
+            <article class="pf-tarjeta"><span>% ganadas</span><b id="pfPorcentaje">—</b></article>
+            <article class="pf-tarjeta"><span>Balance neto</span><b id="pfBalance">—</b></article>
+            <a href="partidas.html" class="pf-tarjeta pf-enlace">Ver mis partidas →</a>
+        </section>
+
+        <div class="pf-formularios">
+            <!-- ===== Editar nombre y username ===== -->
+            <form class="pf-form" id="pfFormPerfil" novalidate>
+            <h2>Editar perfil</h2>
+            <label for="pfInputNombre">Nombre</label>
+            <input type="text" id="pfInputNombre" maxlength="60" autocomplete="name" required>
+            <small>De 1 a 60 caracteres.</small>
+
+            <label for="pfInputUsername">Username</label>
+            <input type="text" id="pfInputUsername" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}" autocomplete="username" required>
+            <small>De 3 a 20 caracteres: letras sin acento, números y guion bajo.</small>
+
+            <label for="pfInputCorreo">Correo</label>
+            <input type="email" id="pfInputCorreo" disabled>
+            <small>El correo no se puede cambiar por ahora.</small>
+
+            <button type="submit" class="pf-boton" id="pfGuardar">Guardar cambios</button>
+            <p class="pf-mensaje" id="pfMensajePerfil" role="status"></p>
+            </form>
+
+            <!-- ===== Cambiar contraseña ===== -->
+            <form class="pf-form" id="pfFormClave" novalidate>
+            <h2>Cambiar contraseña</h2>
+            <label for="pfInputClave">Contraseña nueva</label>
+            <input type="password" id="pfInputClave" minlength="6" autocomplete="new-password" required>
+            <small>Al menos 6 caracteres.</small>
+
+            <label for="pfInputConfirmar">Confirmar contraseña</label>
+            <input type="password" id="pfInputConfirmar" minlength="6" autocomplete="new-password" required>
+
+            <!-- Solo aparece si Supabase pide confirmar la identidad (ver perfil.js). -->
+            <div class="pf-codigo" id="pfCajaCodigo" hidden>
+                <label for="pfInputCodigo">Código enviado a tu correo</label>
+                <input type="text" id="pfInputCodigo" inputmode="numeric" autocomplete="one-time-code">
+                <button type="button" class="pf-boton pf-secundario" id="pfEnviarCodigo">Enviar código otra vez</button>
+            </div>
+
+            <button type="submit" class="pf-boton" id="pfCambiarClave">Cambiar contraseña</button>
+            <p class="pf-mensaje" id="pfMensajeClave" role="status"></p>
+            </form>
+        </div>
+
+        <div class="pf-salir">
+            <a href="#" class="boton" id="pfSalir">Cerrar sesión</a>
+        </div>
+
+        </main>
+    </div>
+    </div>
+
+    <script type="module" src="js/perfil.js"></script>
+</body>
+</html>

@@ -34,9 +34,9 @@ async function cargarUsuario() {
         saldoTokens.textContent =
             Number(perfil.tokens).toLocaleString("es-MX");
 
-        // Mostrar el nombre del jugador
+        // Mostrar el nombre del jugador (enlaza a su perfil)
         enlaceLogin.textContent = perfil.username;
-        enlaceLogin.removeAttribute("href");
+        enlaceLogin.href = "perfil.html";
 
         // Cambiar Registrarse por Cerrar sesión
         enlaceRegistro.textContent = "Cerrar sesión";
