@@ -1,0 +1,72 @@
+/* ===== Perfil (todas las clases propias empiezan con "pf-") ===== */
+
+.pf-verde { color: var(--verde); }
+.pf-rojo { color: #f87171; }
+
+/* Cabecera */
+.pf-cabecera {
+  display: flex; align-items: center; gap: 24px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #6d28d9 100%);
+  border-radius: 18px; padding: 28px;
+}
+.pf-avatar {
+  width: 96px; height: 96px; border-radius: 50%; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  font-family: var(--titulos); font-size: 42px; font-weight: 900;
+  box-shadow: 0 10px 26px rgba(168, 85, 247, .45);
+}
+.pf-datos { flex: 1; min-width: 0; }
+.pf-datos h1 { font-size: 28px; overflow-wrap: anywhere; }
+.pf-datos p { margin: 4px 0 0; }
+.pf-username { color: var(--morado-claro); font-weight: 600; }
+.pf-correo { color: #ddd6fe; font-size: 14px; }
+.pf-miembro { color: #ddd6fe; font-size: 13px; opacity: .8; }
+
+.pf-tokens { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.pf-tokens > span { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #ddd6fe; }
+.pf-tokens b { display: flex; align-items: center; gap: 8px; font-family: var(--titulos); font-size: 30px; }
+.pf-tokens svg { width: 32px; height: 32px; }
+
+/* Estadísticas */
+.pf-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.pf-tarjeta {
+  background: var(--panel-2); border: 1px solid var(--borde); border-radius: 16px;
+  padding: 16px; display: flex; flex-direction: column; gap: 6px;
+}
+.pf-tarjeta > span { font-size: 12px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .05em; }
+.pf-tarjeta > b { font-family: var(--titulos); font-size: 24px; }
+.pf-enlace { justify-content: center; align-items: center; font-weight: 700; color: var(--morado-claro); transition: .2s; }
+.pf-enlace:hover { border-color: var(--morado-claro); color: var(--texto); }
+
+/* Formularios */
+.pf-formularios { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pf-form {
+  background: var(--panel); border: 1px solid var(--borde); border-radius: 18px;
+  padding: 24px; display: flex; flex-direction: column; gap: 6px;
+}
+.pf-form h2 { font-size: 18px; margin-bottom: 8px; }
+.pf-form label { font-size: 13px; font-weight: 600; margin-top: 8px; }
+.pf-form input {
+  background: var(--panel-2); color: var(--texto); border: 1px solid var(--borde);
+  border-radius: 10px; padding: 10px 12px; font: inherit;
+}
+.pf-form input:focus { outline: none; border-color: var(--morado); }
+.pf-form input:disabled { opacity: .6; }
+.pf-form small { font-size: 12px; color: var(--texto-suave); }
+
+.pf-codigo { display: flex; flex-direction: column; gap: 6px; }
+
+.pf-boton {
+  margin-top: 14px; align-self: flex-start; cursor: pointer; border: none; color: #fff;
+  background: linear-gradient(135deg, var(--morado), var(--fucsia));
+  padding: 10px 22px; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 700;
+}
+.pf-boton:disabled { opacity: .5; cursor: default; }
+.pf-secundario { background: var(--panel-2); border: 1px solid var(--borde); margin-top: 4px; }
+
+.pf-mensaje { margin: 6px 0 0; font-size: 13px; min-height: 1em; color: var(--texto-suave); }
+.pf-mensaje.pf-ok { color: var(--verde); }
+.pf-mensaje.pf-mal { color: #f87171; }
+
+.pf-salir { display: flex; justify-content: flex-end; }
