@@ -29,7 +29,7 @@ Casino-Web/
 │   ├── css/
 │   ├── js/
 │   ├── img/
-│   └── juegos/        Una carpeta por juego (tragamonedas, ruleta, blackjack, dados, cara-o-cruz)
+│   └── juegos/        Una carpeta por juego (tragamonedas, ruleta, blackjack, dados, cara-o-cruz, aviator)
 ├── supabase/
 │   ├── migraciones/   Cambios a la base de datos, numerados y en orden
 │   ├── funciones/     Lógica de apuestas y tokens que corre en el servidor

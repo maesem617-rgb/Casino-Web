@@ -166,16 +166,45 @@
                 <a href="juegos/cara-cruz/index.html" class="boton-mini">Jugar</a>
             </article>
 
-            <article class="juego j-dados">
+            <article class="juego j-aviator">
                 <div class="ilustracion">
-                <svg class="dado-g g1"><use href="#dado5"/></svg>
-                <svg class="dado-g g2"><use href="#dado3"/></svg>
+                <!-- Ilustración propia: avión (trazos del SVG del compañero) entre nubes de tormenta. -->
+                <svg class="aviator-g" viewBox="0 0 200 130" aria-hidden="true">
+                    <defs>
+                    <linearGradient id="g-fuselaje" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#ff7777"/>
+                        <stop offset=".55" stop-color="#e52c55"/>
+                        <stop offset="1" stop-color="#8e174c"/>
+                    </linearGradient>
+                    </defs>
+                    <!-- Estela -->
+                    <path d="M6 124 Q70 122 104 70" fill="none" stroke="#e879f9" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/>
+                    <!-- Nube de abajo (cruzada) -->
+                    <g fill="#7c739e" opacity=".55">
+                    <circle cx="34" cy="96" r="11"/><circle cx="48" cy="88" r="14"/><circle cx="63" cy="95" r="11"/><rect x="30" y="95" width="36" height="11" rx="5.5"/>
+                    </g>
+                    <!-- Nube de tormenta con rayo -->
+                    <polygon points="160,38 150,58 158,58 148,80 170,52 161,52 168,38" fill="#fde047" stroke="#b45309" stroke-width="1.5" stroke-linejoin="round"/>
+                    <g fill="#3b3355">
+                    <circle cx="146" cy="30" r="13"/><circle cx="163" cy="22" r="17"/><circle cx="181" cy="30" r="12"/><rect x="140" y="29" width="46" height="13" rx="6.5"/>
+                    </g>
+                    <!-- Avión -->
+                    <g transform="translate(70 40) rotate(-22 50 25) scale(.45)">
+                    <path d="M55 61 L18 91 L64 78 L88 59" fill="#a21c5b" stroke="#ff92bd" stroke-width="2"/>
+                    <path d="M102 53 L65 12 L94 18 L143 48" fill="#9d1959" stroke="#ff8db9" stroke-width="2"/>
+                    <path d="M24 62 Q70 46 160 40 Q186 37 196 51 Q183 65 150 68 L50 78 Z" fill="url(#g-fuselaje)" stroke="#ffb3cc" stroke-width="3"/>
+                    <path d="M130 42 Q143 25 163 33 L174 44 Z" fill="#a6e8ff" stroke="#fff" stroke-width="2"/>
+                    <path d="M100 60 L61 102 L91 99 L146 60" fill="#f44a81" stroke="#ffb3cc" stroke-width="2"/>
+                    <ellipse cx="198" cy="52" rx="4" ry="34" fill="#d9c8ff" opacity=".7"/>
+                    <circle cx="198" cy="52" r="7" fill="#ffcf49"/>
+                    </g>
+                </svg>
                 </div>
                 <div class="juego-info">
-                <h4>Dados</h4>
-                <p>Predice el resultado del tiro.</p>
+                <h4>Aviator</h4>
+                <p>Retírate antes de que la tormenta te derribe.</p>
                 </div>
-                <a href="juegos/aviator/index.html" class="boton-mini">Jugar</a>            
+                <a href="juegos/aviator/index.html" class="boton-mini">Jugar</a>
             </article>
 
             <article class="juego j-ruleta">
