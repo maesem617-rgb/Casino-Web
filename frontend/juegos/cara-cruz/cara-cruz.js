@@ -240,22 +240,36 @@ async function lanzar() {
 }
 
 // ===== Historial (lectura directa: la política RLS solo deja ver lo propio) =====
-// El esquema no fija el nombre de la columna de fecha, así que se prueba
-// con los nombres más comunes. Se ordena por id_partida (siempre crece).
-function obtenerFecha(partida) {
-    const valor = partida.fecha ?? partida.fecha_partida ?? partida.fecha_hora
-        ?? partida.created_at ?? partida.creada_en;
-    if (!valor) return "—";
-    return new Date(valor).toLocaleString("es-MX", { dateStyle: "short", timeStyle: "short" });
+let idJuego = null; // id de Cara o cruz en el catálogo, se busca por nombre
+
+async function obtenerIdJuego() {
+    if (idJuego !== null) return idJuego;
+
+    // La política juego_leer_activos deja leer los juegos con estado = true.
+    const { data, error } = await supabase
+        .from("juego")
+        .select("id_juego")
+        .eq("nombre", NOMBRE_JUEGO)
+        .single();
+
+    if (error) {
+        console.error("Error al buscar el juego:", error.message);
+        return null;
+    }
+    idJuego = data.id_juego;
+    return idJuego;
 }
 
 async function cargarHistorial() {
+    const id = await obtenerIdJuego();
+    if (id === null) return;
+
     const { data, error } = await supabase
         .from("partida")
-        .select("*, juego!inner(nombre)")
+        .select("fecha_hora, apuesta, resultado")
         .eq("id_usuario", idUsuario)
-        .eq("juego.nombre", NOMBRE_JUEGO)
-        .order("id_partida", { ascending: false })
+        .eq("id_juego", id)
+        .order("fecha_hora", { ascending: false })
         .limit(10);
 
     if (error) {
@@ -272,7 +286,8 @@ async function cargarHistorial() {
 
         const fecha = document.createElement("span");
         fecha.className = "fecha";
-        fecha.textContent = obtenerFecha(partida);
+        fecha.textContent = new Date(partida.fecha_hora)
+            .toLocaleString("es-MX", { dateStyle: "short", timeStyle: "short" });
 
         const monto = document.createElement("span");
         monto.className = "monto";
