@@ -37,6 +37,38 @@
 
 begin;
 
+-- ---------------------------------------------------------------------
+-- LIMPIEZA: objetos de la primera versión de Aviator.
+-- Se crearon a mano desde el panel de Supabase (sin migración), así que no
+-- están en el repo y no conocemos sus firmas exactas. Esta migración los
+-- reemplaza:
+--   * funciones public.aviator_iniciar / aviator_estado / aviator_retirar
+--     (cualquier firma; la vieja aviator_estado usaba p_id_ronda y por eso
+--     CREATE OR REPLACE fallaba con el error 42P13);
+--   * tabla public.aviator_ronda.
+-- NO se tocan partida ni movimiento_token: las partidas ya jugadas se conservan.
+-- Las funciones nuevas se crean más abajo, así que este bloque no las borra.
+-- Sin CASCADE: si algo dependiera de estos objetos, la migración falla
+-- completa (no se aplica nada) en lugar de borrar cosas de más.
+-- ---------------------------------------------------------------------
+do $$
+declare
+    f record;
+begin
+    for f in
+        select p.proname, pg_get_function_identity_arguments(p.oid) as args
+          from pg_proc p
+         where p.pronamespace = 'public'::regnamespace
+           and p.proname in ('aviator_iniciar', 'aviator_estado', 'aviator_retirar')
+    loop
+        raise notice 'Eliminando función vieja: public.%(%)', f.proname, f.args;
+        execute format('drop function public.%I(%s)', f.proname, f.args);
+    end loop;
+end;
+$$;
+
+drop table if exists public.aviator_ronda;
+
 -- pgcrypto da gen_random_bytes(), una fuente aleatoria criptográfica.
 -- En Supabase ya viene instalada en el esquema "extensions".
 create extension if not exists pgcrypto with schema extensions;
